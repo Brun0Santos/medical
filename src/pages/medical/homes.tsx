@@ -1,11 +1,9 @@
 interface NomeProps {
-  nome: string
+  nome: string;
 }
 
-function Homes({nome}: NomeProps) {
-  return (
-    <div>Fala aer meu mano {nome}</div>
-  )
+function Homes({ nome }: NomeProps) {
+  return <div>Fala aer meu mano {nome}</div>;
 }
 
 export default Homes;
