@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Sidebar from "./sidebar/Sidebar";
+import Sidebar from './sidebar/Sidebar';
 
 function Layout() {
   return (
     <div>
-      <p>Teste</p>
       <Sidebar />
     </div>
   );
