@@ -1,27 +1,19 @@
 'use client';
 import styled from 'styled-components';
 
-export const SidebarMenu = styled.nav`
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  height: 100%;
-  width: 273px;
-  background: #fff;
-  padding: 15px 10px;
-  border: 1px solid rgba(219, 219, 219, 0.933);
-
-  &:hover {
-    transition: 0.5s;
-  }
-`;
-
 export const Container = styled.div`
   background-color: #fffe;
   width: 100vw;
   height: 100vh;
   display: flex;
+`;
+
+export const SidebarMenu = styled.nav`
+  height: 100%;
+  width: 278px;
+  background: #fff;
+  padding: 15px 10px;
+  border: 1px solid rgba(219, 219, 219, 0.933);
 `;
 
 export const LogoContainer = styled.div`
@@ -76,13 +68,16 @@ export const LiContainer = styled.li`
   display: flex;
   align-items: center;
   list-style: none;
+`;
 
-  .link {
-    text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    color: #707070;
-  }
+export const Link = styled.a`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #707070;
+  width: 100%;
 
   &:hover {
     color: #fff;
