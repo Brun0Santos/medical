@@ -1,7 +1,7 @@
-import Head from "next/head";
+import Head from 'next/head';
 
-import Layout from "../components/layout/Layout";
-import StyledComponentsRegistry from "../registry";
+import Layout from '../components/layout/Layout';
+import StyledComponentsRegistry from '../registry';
 
 export default function Home() {
   return (
