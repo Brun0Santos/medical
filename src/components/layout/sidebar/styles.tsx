@@ -149,7 +149,7 @@ export const MenuInfoContainer = styled.div`
   justify-content: space-between;
   padding: 40px 0 0 30px;
   background-color: #4070f4;
-  height: 250px;
+  height: 247px;
   width: 100%;
   position: absolute;
   top: 0;
@@ -171,6 +171,10 @@ export const MenuNavbar = styled.ul`
 
   li {
     margin: 0 10px;
+
+    &:hover {
+      border-bottom: 3px solid #ffff;
+    }
   }
 
   a {

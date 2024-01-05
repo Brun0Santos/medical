@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
+import Logo from '../../../../public/d.jpg';
 import * as S from './styles';
 
 function Sidebar() {
@@ -9,7 +10,7 @@ function Sidebar() {
       <S.SidebarMenu>
         <S.LogoContainer>
           <S.NavImage>
-            <Image src={'/public/d.jpg'} alt="Minha Imagem" width={300} height={300} />
+            <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
           </S.NavImage>
           <S.LogoName>Brunos Medical</S.LogoName>
         </S.LogoContainer>
@@ -84,7 +85,7 @@ function Sidebar() {
 
           <S.AccountContainer>
             <S.AccountImg>
-              <Image src={'/public/d.jpg'} alt="Logo" width={300} height={300} />
+              <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
             </S.AccountImg>
             <S.DataText>
               <span className="name">Bruno</span>
@@ -116,7 +117,7 @@ function Sidebar() {
 
             <div>
               <S.NavImage>
-                <Image src={'/public/d.jpg'} alt="Minha Imagem" width={300} height={300} />
+                <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
               </S.NavImage>
             </div>
 
@@ -124,13 +125,11 @@ function Sidebar() {
               <span>Bruno</span>
             </S.NameText>
           </S.MenuNavbar>
-
-          <S.Content>
-            <div className="conteudo">
-              <p>Teste</p>
-            </div>
-          </S.Content>
         </S.MenuInfoContainer>
+
+        <S.Content>
+          <p>Teste</p>
+        </S.Content>
       </S.ContentContainer>
     </S.Container>
   );
