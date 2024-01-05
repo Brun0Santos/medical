@@ -6,7 +6,7 @@ import * as S from './styles';
 
 function Sidebar() {
   return (
-    <S.Container>
+    <>
       <S.SidebarMenu>
         <S.LogoContainer>
           <S.NavImage>
@@ -94,44 +94,7 @@ function Sidebar() {
           </S.AccountContainer>
         </S.MenuContainer>
       </S.SidebarMenu>
-
-      <S.ContentContainer>
-        <S.MenuInfoContainer>
-          <S.Title>
-            <div className="titulo">Painel Administrativo</div>
-          </S.Title>
-
-          <S.MenuNavbar>
-            <li>
-              <a href="#">Início</a>
-            </li>
-            <li>
-              <a href="#">Sobre</a>
-            </li>
-            <li>
-              <a href="#">Serviços</a>
-            </li>
-            <li>
-              <a href="#">Contato</a>
-            </li>
-
-            <div>
-              <S.NavImage>
-                <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
-              </S.NavImage>
-            </div>
-
-            <S.NameText>
-              <span>Bruno</span>
-            </S.NameText>
-          </S.MenuNavbar>
-        </S.MenuInfoContainer>
-
-        <S.Content>
-          <p>Teste</p>
-        </S.Content>
-      </S.ContentContainer>
-    </S.Container>
+    </>
   );
 }
 

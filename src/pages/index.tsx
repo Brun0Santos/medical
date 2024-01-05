@@ -13,7 +13,7 @@ export default function Home() {
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
       </Head>
       <StyledComponentsRegistry>
-        <Layout />
+        <Layout title="Painel Administrativo"></Layout>
       </StyledComponentsRegistry>
     </div>
   );

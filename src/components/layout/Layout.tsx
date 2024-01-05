@@ -1,12 +1,20 @@
 import React from 'react';
 
+import Navbar from './navbar/Navbar';
 import Sidebar from './sidebar/Sidebar';
+import * as S from './styles.layout';
 
-function Layout() {
+interface LayoutProps {
+  children?: React.ReactNode;
+  title: string;
+}
+
+function Layout({ children, title }: LayoutProps) {
   return (
-    <div>
-      <Sidebar />
-    </div>
+    <S.Container>
+      <Sidebar></Sidebar>
+      <Navbar title={title}>{children}</Navbar>
+    </S.Container>
   );
 }
 

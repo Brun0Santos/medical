@@ -1,13 +1,6 @@
 'use client';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  background-color: #fffe;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-`;
-
 export const SidebarMenu = styled.nav`
   height: 100%;
   width: 278px;
