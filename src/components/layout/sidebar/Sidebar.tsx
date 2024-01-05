@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 
@@ -23,14 +25,14 @@ function Sidebar() {
             </S.MenuTitle>
 
             <S.LiContainer>
-              <S.Link href="#">
+              <S.Link href="/medical/home">
                 <i className="bx bx-home-alt"></i>
                 <span>Dashboard</span>
               </S.Link>
             </S.LiContainer>
 
             <S.LiContainer>
-              <S.Link href="#">
+              <S.Link href="/especialidade">
                 <i className="bx bx-grid-alt"></i>
                 <span>Especialidades</span>
               </S.Link>
