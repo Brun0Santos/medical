@@ -32,7 +32,7 @@ function Sidebar() {
             </S.LiContainer>
 
             <S.LiContainer>
-              <S.Link href="/especialidade">
+              <S.Link href="/medical/especialidades">
                 <i className="bx bx-grid-alt"></i>
                 <span>Especialidades</span>
               </S.Link>
@@ -41,7 +41,7 @@ function Sidebar() {
 
           <ul>
             <S.LiContainer>
-              <S.Link href="#">
+              <S.Link href="/medicos">
                 <i className="bx bxs-magic-wand"></i>
                 <span>Médicos</span>
               </S.Link>
