@@ -1,12 +1,24 @@
 'use client';
-
 import { Button, TextField } from '@mui/material';
 import Link from 'next/link';
+import React, { useState } from 'react';
 
+import { Especialidade } from '../../../models/especialidade/especialidadeModel';
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function EspecialidadeForm() {
+  const [especialidade, setEspecialidade] = useState<string>('');
+  const [descricao, setDescricao] = useState<string>('');
+
+  const sendDadosEspecialidade = () => {
+    const especialidades: Especialidade = {
+      especialidade,
+      descricao,
+    };
+    console.log(especialidades);
+  };
+
   return (
     <Layout title="Painel de Administração">
       <S.Container>
@@ -27,6 +39,7 @@ function EspecialidadeForm() {
             type="text"
             label="Especialidade"
             placeholder="Testes"
+            onChange={(e) => setEspecialidade(e.target.value)}
           />
 
           <TextField
@@ -36,11 +49,13 @@ function EspecialidadeForm() {
             multiline
             rows={4}
             style={{ marginTop: '30px' }}
+            onChange={(e) => setDescricao(e.target.value)}
           />
           <Link href={'/medical/especialidades'}>
             <Button
               variant="contained"
               style={{ backgroundColor: '#4070f4', width: '80px', marginTop: '10px' }}
+              onClick={sendDadosEspecialidade}
             >
               Salvar
             </Button>
