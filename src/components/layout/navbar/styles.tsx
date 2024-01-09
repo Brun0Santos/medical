@@ -12,7 +12,7 @@ export const MenuInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px 0 0 30px;
-  background-color: #4070f4;
+  background: linear-gradient(to right, #4070f4, #4682b4);
   height: 247px;
   width: 100%;
   position: absolute;
@@ -56,6 +56,7 @@ export const NameText = styled.div`
 export const Content = styled.div`
   margin-top: 150px;
   position: absolute;
+  border-radius: 5px;
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
