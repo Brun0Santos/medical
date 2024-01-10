@@ -41,7 +41,7 @@ function Sidebar() {
 
           <ul>
             <S.LiContainer>
-              <S.Link href="/medicos">
+              <S.Link href="/medical/medicos">
                 <i className="bx bxs-magic-wand"></i>
                 <span>Médicos</span>
               </S.Link>
