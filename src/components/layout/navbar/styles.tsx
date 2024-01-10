@@ -12,7 +12,7 @@ export const MenuInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px 0 0 30px;
-  background: linear-gradient(to right, #4070f4, #4682b4);
+  background: #636363;
   height: 247px;
   width: 100%;
   position: absolute;
