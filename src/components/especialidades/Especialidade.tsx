@@ -2,26 +2,26 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Especialidade as EspecialidadeModel } from '../../models/especialidade/especialidadeModel';
+import { Speciality } from '../../models/especialidade/especialidadeModel';
 import Layout from '../layout/Layout';
 import * as S from './styles';
 import TableEspecialidade from './table/TableEspecialidade';
 
 function Especialidade() {
   const router = useRouter();
-  const arrayEspecialidade: Array<EspecialidadeModel> = [
-    { id: '1', descricao: 'Ortopedia muscular', especialidade: 'Ortopedia' },
-    { id: '2', descricao: 'Ortopedia da perna', especialidade: 'Ortopedia' },
-    { id: '3', descricao: 'Ortopedia do braço', especialidade: 'Ortopedia' },
-    { id: '4', descricao: 'Ortopedia do mão', especialidade: 'Ortopedia' },
-    { id: '5', descricao: 'Ortopedia do joelho', especialidade: 'Ortopedia' },
+  const arrayEspecialidade: Array<Speciality> = [
+    { id: '1', description: 'Ortopedia muscular', name: 'Ortopedia' },
+    { id: '2', description: 'Ortopedia da perna', name: 'Ortopedia' },
+    { id: '3', description: 'Ortopedia do braço', name: 'Ortopedia' },
+    { id: '4', description: 'Ortopedia do mão', name: 'Ortopedia' },
+    { id: '5', description: 'Ortopedia do joelho', name: 'Ortopedia' },
   ];
 
-  const deletes = (especialidade: EspecialidadeModel) => {
+  const deletes = (especialidade: Speciality) => {
     console.log(especialidade);
   };
 
-  const edit = (especialidade: EspecialidadeModel) => {
+  const edit = (especialidade: Speciality) => {
     router.push(`/medical/especialidades/nova-especialidade?id=${especialidade.id}`);
   };
 
