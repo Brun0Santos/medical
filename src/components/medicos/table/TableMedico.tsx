@@ -34,7 +34,11 @@ function TableMedico({ doctor, onEdit, onDelete }: DoctorList) {
           <TableRow style={{ backgroundColor: '#e8e8e8' }}>
             <TableCell align="left">Img</TableCell>
             <TableCell align="center">Nome</TableCell>
-            <TableCell align="center">Descrição</TableCell>
+            <TableCell align="center">CRM</TableCell>
+            <TableCell align="center">Especialidade</TableCell>
+            <TableCell align="center">Contato</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">CPF</TableCell>
             <TableCell align="center">Opções</TableCell>
           </TableRow>
         </TableHead>
@@ -55,7 +59,11 @@ const RowEspecialidade = ({ doctor, onEdit, onDelete }: DoctorRowProps) => {
         <Avatar alt="luciano" src={'https://randomuser.me/api/portraits/men/52.jpg'} />
       </TableCell>
       <TableCell align="center">{doctor.name}</TableCell>
+      <TableCell align="center">{doctor.crm}</TableCell>
+      <TableCell align="center">{doctor.specialities?.map((e) => e.name)}</TableCell>
       <TableCell align="center">{doctor.contact}</TableCell>
+      <TableCell align="center">{doctor.email}</TableCell>
+      <TableCell align="center">{doctor.cpf}</TableCell>
       <TableCell align="left">
         <S.ButtonGroup>
           <S.ButtonEdit onClick={() => onEdit(doctor)}>
