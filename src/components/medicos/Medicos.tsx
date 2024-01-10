@@ -1,10 +1,11 @@
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import router from 'next/router';
 
 import { Address } from '../../models/especialidade/enderecoModel';
 import { Speciality } from '../../models/especialidade/especialidadeModel';
 import { Doctor } from '../../models/especialidade/medicoModel';
 import Layout from '../layout/Layout';
+import * as S from './styles';
 import TableMedico from './table/TableMedico';
 
 function Medicos() {
@@ -48,14 +49,15 @@ function Medicos() {
 
   return (
     <Layout title="Especialidades">
-      <Box display={'flex'} justifyContent={'space-between'}>
-        <div>Médicos</div>
-        <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
-          Novo Médico
-        </Button>
-      </Box>
-
-      <TableMedico doctor={doctorArrays} onEdit={edit} onDelete={deletes} />
+      <S.Container>
+        <S.NavContainer>
+          <div>Médicos</div>
+          <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
+            Novo Médico
+          </Button>
+        </S.NavContainer>
+        <TableMedico doctor={doctorArrays} onEdit={edit} onDelete={deletes} />
+      </S.Container>
     </Layout>
   );
 }
