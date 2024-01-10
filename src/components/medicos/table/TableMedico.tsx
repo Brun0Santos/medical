@@ -56,7 +56,7 @@ const RowEspecialidade = ({ doctor, onEdit, onDelete }: DoctorRowProps) => {
   return (
     <TableRow key={doctor.id}>
       <TableCell align="left">
-        <Avatar alt="luciano" src={'https://randomuser.me/api/portraits/men/52.jpg'} />
+        <Avatar alt="luciano" src={`https://randomuser.me/api/portraits/men/${doctor.id}.jpg`} />
       </TableCell>
       <TableCell align="center">{doctor.name}</TableCell>
       <TableCell align="center">{doctor.crm}</TableCell>
