@@ -1,5 +1,8 @@
-export interface Especialidade {
+import { Doctor } from './medicoModel';
+
+export interface Speciality {
   id?: string;
-  especialidade?: string;
-  descricao?: string;
+  name?: string;
+  description?: string;
+  doctor?: Array<Doctor>;
 }
