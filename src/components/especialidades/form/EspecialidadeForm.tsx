@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-import { Especialidade } from '../../../models/especialidade/especialidadeModel';
+import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
@@ -16,9 +16,9 @@ function EspecialidadeForm() {
   const [descricao, setDescricao] = useState<string>('');
 
   const sendDadosEspecialidade = () => {
-    const especialidades: Especialidade = {
-      especialidade,
-      descricao,
+    const especialidades: Speciality = {
+      name: especialidade,
+      description: descricao,
     };
     console.log(especialidades);
   };
