@@ -12,19 +12,19 @@ import {
 import { MdDelete } from 'react-icons/md';
 import { MdModeEdit } from 'react-icons/md';
 
-import { Especialidade } from '../../../models/especialidade/especialidadeModel';
+import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import * as S from './styles';
 
 interface ListaEspecialidade {
-  especialidade: Array<Especialidade>;
-  onEdit: (especialidade: Especialidade) => void;
-  onDelete: (especialidade: Especialidade) => void;
+  especialidade: Array<Speciality>;
+  onEdit: (especialidade: Speciality) => void;
+  onDelete: (especialidade: Speciality) => void;
 }
 
 interface EspecialidadeRowProps {
-  especialidade: Especialidade;
-  onEdit: (especialidade: Especialidade) => void;
-  onDelete: (especialidade: Especialidade) => void;
+  especialidade: Speciality;
+  onEdit: (especialidade: Speciality) => void;
+  onDelete: (especialidade: Speciality) => void;
 }
 
 function TableEspecialidade({ especialidade, onEdit, onDelete }: ListaEspecialidade) {
@@ -60,8 +60,8 @@ const RowEspecialidade = ({ especialidade, onEdit, onDelete }: EspecialidadeRowP
       <TableCell align="left">
         <Avatar alt="luciano" src={'https://randomuser.me/api/portraits/men/52.jpg'} />
       </TableCell>
-      <TableCell align="center">{especialidade.especialidade}</TableCell>
-      <TableCell align="center">{especialidade.descricao}</TableCell>
+      <TableCell align="center">{especialidade.name}</TableCell>
+      <TableCell align="center">{especialidade.description}</TableCell>
       <TableCell align="left">
         <S.ButtonGroup>
           <S.ButtonEdit onClick={() => onEdit(especialidade)}>
