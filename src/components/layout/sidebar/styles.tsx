@@ -74,7 +74,8 @@ export const Link = styled.a`
 
   &:hover {
     color: #fff;
-    background-color: #4070f4;
+    /* background-color: #4070f4; */
+    background-color: #0c0b1a;
   }
 
   span {
