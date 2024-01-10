@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import Link from 'next/link';
 import router from 'next/router';
 
 import { Address } from '../../models/especialidade/enderecoModel';
@@ -37,6 +38,42 @@ function Medicos() {
       contact: '1212121',
       specialities: arrayEspecialidade,
     },
+
+    {
+      id: '2',
+      address: doctorAddress,
+      sex: 'MALE',
+      name: 'Lucas',
+      cpf: '5343443434',
+      crm: '4343',
+      email: 'lucas@gmail.com',
+      contact: '1212121',
+      specialities: arrayEspecialidade,
+    },
+
+    {
+      id: '3',
+      address: doctorAddress,
+      sex: 'FEMALE',
+      name: 'Leticia',
+      cpf: '5343443434',
+      crm: '4343',
+      email: 'leticia@gmail.com',
+      contact: '1212121',
+      specialities: arrayEspecialidade,
+    },
+
+    {
+      id: '4',
+      address: doctorAddress,
+      sex: 'MALE',
+      name: 'Pedro',
+      cpf: '5343443434',
+      crm: '4343',
+      email: 'pedro@gmail.com',
+      contact: '1212121',
+      specialities: arrayEspecialidade,
+    },
   ];
 
   const deletes = (doctor: Doctor) => {
@@ -52,9 +89,11 @@ function Medicos() {
       <S.Container>
         <S.NavContainer>
           <div>Médicos</div>
-          <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
-            Novo Médico
-          </Button>
+          <Link href={'/medical/medicos/novo-medico'}>
+            <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
+              Novo Médico
+            </Button>
+          </Link>
         </S.NavContainer>
         <TableMedico doctor={doctorArrays} onEdit={edit} onDelete={deletes} />
       </S.Container>
