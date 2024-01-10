@@ -1,13 +1,17 @@
 'use client';
 import { Button, TextField } from '@mui/material';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 import { Especialidade } from '../../../models/especialidade/especialidadeModel';
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function EspecialidadeForm() {
+  const searchParams = useSearchParams();
+  const searchId = searchParams.get('id');
+
   const [especialidade, setEspecialidade] = useState<string>('');
   const [descricao, setDescricao] = useState<string>('');
 
@@ -18,6 +22,13 @@ function EspecialidadeForm() {
     };
     console.log(especialidades);
   };
+
+  useEffect(() => {
+    if (searchId) {
+      setEspecialidade('Nova especialidade de teste');
+      setDescricao('Uma descricao de teste apos o edit');
+    }
+  }, [searchId]);
 
   return (
     <Layout title="Painel de Administração">
@@ -40,6 +51,7 @@ function EspecialidadeForm() {
             label="Especialidade"
             placeholder="Testes"
             onChange={(e) => setEspecialidade(e.target.value)}
+            value={especialidade}
           />
 
           <TextField
@@ -50,14 +62,15 @@ function EspecialidadeForm() {
             rows={4}
             style={{ marginTop: '30px' }}
             onChange={(e) => setDescricao(e.target.value)}
+            value={descricao}
           />
           <Link href={'/medical/especialidades'}>
             <Button
               variant="contained"
-              style={{ backgroundColor: '#4070f4', width: '80px', marginTop: '10px' }}
+              style={{ backgroundColor: '#4070f4', width: '100px', marginTop: '10px' }}
               onClick={sendDadosEspecialidade}
             >
-              Salvar
+              {searchId ? 'Atualizar' : 'Salvar'}
             </Button>
           </Link>
         </S.ContentContainer>
