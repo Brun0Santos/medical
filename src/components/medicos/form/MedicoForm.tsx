@@ -1,10 +1,25 @@
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import Link from 'next/link';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function MedicoForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmitForm = (data: any) => {
+    console.log('teste');
+    console.log(data);
+  };
+
   return (
     <Layout title="Painel de Administração">
       <S.Container>
@@ -17,36 +32,28 @@ function MedicoForm() {
           </Link>
         </S.NavContainer>
 
-        <S.ContentContainer>
-          <TextField
-            fullWidth
-            id="fullWidth"
-            variant="outlined"
-            type="text"
-            label="Nome"
-            placeholder="Nome do médico"
-            // onChange={(e) => setEspecialidade(e.target.value)}
-            // value={especialidade}
-          />
+        <S.ContentContainer onSubmit={handleSubmit(handleSubmitForm)}>
+          <S.InputBox>
+            <S.LabelInput htmlFor="name">Nome:</S.LabelInput>
+            <input type="text" id="name" placeholder="Nome do paciente" {...register('name')} />
+          </S.InputBox>
 
-          <TextField
-            fullWidth
-            label="Descrição do Produto"
-            placeholder="Descrição da especialidade"
-            multiline
-            rows={4}
-            style={{ marginTop: '30px' }}
-            // onChange={(e) => setDescricao(e.target.value)}
-            // value={descricao}
-          />
-          <Link href={'/medical/medicos'}>
-            <Button
-              variant="contained"
-              style={{ backgroundColor: '#4070f4', width: '100px', marginTop: '10px' }}
-            >
-              Salvar
-            </Button>
-          </Link>
+          <S.InputBox>
+            <S.LabelInput htmlFor="description">Descrição:</S.LabelInput>
+            <input
+              type="text"
+              id="description"
+              placeholder="Descrição"
+              {...register('description')}
+            />
+          </S.InputBox>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: '#4070f4', width: '100px' }}
+          >
+            Enviar
+          </Button>
         </S.ContentContainer>
       </S.Container>
     </Layout>
