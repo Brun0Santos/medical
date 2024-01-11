@@ -1,18 +1,12 @@
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function MedicoForm() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    control,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmitForm = (data: any) => {
