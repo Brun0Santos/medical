@@ -13,7 +13,7 @@ export const NavContainer = styled.div`
   padding-bottom: 40px;
 `;
 
-export const ContentContainer = styled.div`
+export const ContentContainer = styled.form`
   display: flex;
   flex-direction: column;
   padding: 0px 30px;
@@ -23,8 +23,26 @@ export const ContentContainer = styled.div`
   padding-bottom: 40px;
 `;
 
-export const Button = styled.div`
+export const InputBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 40px;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  input {
+    height: 50px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+    outline: none;
+    border-radius: 3px;
+  }
+
+  :focus {
+    border-color: #1976d2;
+  }
+`;
+
+export const LabelInput = styled.label`
+  padding-bottom: 4px;
 `;
