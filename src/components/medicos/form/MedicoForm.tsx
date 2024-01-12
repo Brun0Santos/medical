@@ -33,14 +33,45 @@ function MedicoForm() {
           </S.InputBox>
 
           <S.InputBox>
-            <S.LabelInput htmlFor="description">Descrição:</S.LabelInput>
-            <input
-              type="text"
-              id="description"
-              placeholder="Descrição"
-              {...register('description')}
-            />
+            <S.LabelInput htmlFor="crm">CRM:</S.LabelInput>
+            <input type="text" id="crm" placeholder="CRM" {...register('crm')} />
           </S.InputBox>
+
+          <S.InputBox>
+            <S.LabelInput htmlFor="contact">Contato:</S.LabelInput>
+            <input type="text" id="contact" placeholder="Contato" {...register('contact')} />
+          </S.InputBox>
+
+          <S.InputBox>
+            <S.LabelInput htmlFor="email">E-mail:</S.LabelInput>
+            <input type="email" id="email" placeholder="E-mail" {...register('email')} />
+          </S.InputBox>
+
+          <S.InputBox>
+            <S.LabelInput htmlFor="cpf">CPF:</S.LabelInput>
+            <input type="number" id="cpf" placeholder="CPF" {...register('cpf')} />
+          </S.InputBox>
+
+          <div>
+            <div>
+              <label>Gênero</label>
+            </div>
+            <label>
+              <input type="radio" id="options" value="MALE" {...register('gender')}></input>
+              Masculino
+            </label>
+
+            <label>
+              <input type="radio" id="options" value="FEMALE" {...register('gender')}></input>
+              Feminino
+            </label>
+
+            <label>
+              <input type="radio" id="options" value="OTHER" {...register('gender')}></input>
+              Outro
+            </label>
+          </div>
+
           <Button
             type="submit"
             variant="contained"
