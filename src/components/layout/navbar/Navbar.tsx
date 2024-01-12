@@ -13,7 +13,6 @@ function Navbar({ title, children }: Title) {
     <S.ContentContainer>
       <S.MenuInfoContainer>
         <S.Title>{title}</S.Title>
-
         <S.MenuNavbar>
           <li>
             <a href="#">Início</a>
@@ -27,7 +26,6 @@ function Navbar({ title, children }: Title) {
           <li>
             <a href="#">Contato</a>
           </li>
-
           <S.NavImage>
             <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
           </S.NavImage>
@@ -38,7 +36,7 @@ function Navbar({ title, children }: Title) {
         </S.MenuNavbar>
       </S.MenuInfoContainer>
 
-      <S.Content>{children}</S.Content>
+      <S.OverlayContainer>{children}</S.OverlayContainer>
     </S.ContentContainer>
   );
 }
