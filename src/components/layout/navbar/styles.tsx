@@ -2,22 +2,19 @@
 import styled from 'styled-components';
 
 export const ContentContainer = styled.div`
-  flex: 1;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
 `;
 
 export const MenuInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 40px 0 0 30px;
-  background: #636363;
-  height: 247px;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  height: 190px;
+  background-color: #444;
+  padding: 20px;
 `;
 
 export const Title = styled.div`
@@ -28,9 +25,8 @@ export const Title = styled.div`
 export const MenuNavbar = styled.ul`
   display: flex;
   align-items: start;
+  justify-content: end;
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
 
   li {
@@ -53,21 +49,6 @@ export const NameText = styled.div`
   color: #fff;
 `;
 
-export const Content = styled.div`
-  margin-top: 150px;
-  position: absolute;
-  border-radius: 5px;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  padding: 20px;
-  background-color: white;
-  width: 90%;
-  height: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-`;
-
 export const NavImage = styled.span`
   display: flex;
   min-width: 55px;
@@ -78,4 +59,18 @@ export const NavImage = styled.span`
     width: 35px;
     border-radius: 50%;
   }
+`;
+
+export const OverlayContainer = styled.div`
+  position: absolute;
+  padding: 20px;
+  top: 10%;
+  left: 25%;
+  right: 25%;
+  width: 60%;
+  height: auto;
+  background-color: white;
+  z-index: 2;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
