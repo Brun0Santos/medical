@@ -2,6 +2,9 @@
 import styled from 'styled-components';
 
 export const SidebarMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   width: 278px;
   background: #fff;
@@ -37,8 +40,7 @@ export const LogoName = styled.span`
 export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-top: 40px;
+  justify-content: end;
 `;
 
 export const MenuTitle = styled.div`
