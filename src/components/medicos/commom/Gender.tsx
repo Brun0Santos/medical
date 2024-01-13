@@ -1,4 +1,4 @@
-import React from 'react';
+import * as S from './styles';
 
 interface RadioGroupProps {
   label: string;
@@ -9,7 +9,7 @@ interface RadioGroupProps {
 
 function Gender({ label, options, selectedValue, onChange }: RadioGroupProps) {
   return (
-    <div>
+    <S.ContainerRadio>
       <div>
         <label>{label}</label>
       </div>
@@ -25,7 +25,7 @@ function Gender({ label, options, selectedValue, onChange }: RadioGroupProps) {
           {option.label}
         </label>
       ))}
-    </div>
+    </S.ContainerRadio>
   );
 }
 
