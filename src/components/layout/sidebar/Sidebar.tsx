@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { BsGraphUpArrow } from 'react-icons/bs';
 import { FaUserDoctor } from 'react-icons/fa6';
@@ -31,41 +32,49 @@ function Sidebar() {
             </S.MenuTitle>
 
             <S.LiContainer>
-              <S.Link href="/medical/home">
-                <i>
-                  <RxDashboard />
-                </i>
-                <span>Dashboard</span>
-              </S.Link>
+              <Link href={'/medical/home'} legacyBehavior>
+                <S.Link>
+                  <i>
+                    <RxDashboard />
+                  </i>
+                  <span>Dashboard</span>
+                </S.Link>
+              </Link>
             </S.LiContainer>
 
             <S.LiContainer>
-              <S.Link href="/medical/especialidades">
-                <i>
-                  <FiGitBranch />
-                </i>
-                <span>Especialidades</span>
-              </S.Link>
+              <Link href={'/medical/especialidades'} legacyBehavior>
+                <S.Link>
+                  <i>
+                    <FiGitBranch />
+                  </i>
+                  <span>Especialidades</span>
+                </S.Link>
+              </Link>
             </S.LiContainer>
           </ul>
 
           <ul>
             <S.LiContainer>
-              <S.Link href="/medical/medicos">
-                <i>
-                  <FaUserDoctor />
-                </i>
-                <span>Médicos</span>
-              </S.Link>
+              <Link href={'/medical/medicos'} legacyBehavior>
+                <S.Link>
+                  <i>
+                    <FaUserDoctor />
+                  </i>
+                  <span>Médicos</span>
+                </S.Link>
+              </Link>
             </S.LiContainer>
 
             <S.LiContainer>
-              <S.Link href="/medical/pacientes">
-                <i>
-                  <FaUsers />
-                </i>
-                <span>Pacientes</span>
-              </S.Link>
+              <Link href={'/medical/pacientes'} legacyBehavior>
+                <S.Link>
+                  <i>
+                    <FaUsers />
+                  </i>
+                  <span>Pacientes</span>
+                </S.Link>
+              </Link>
             </S.LiContainer>
 
             <S.LiContainer>
