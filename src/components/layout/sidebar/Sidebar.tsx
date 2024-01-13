@@ -48,7 +48,7 @@ function Sidebar() {
             </S.LiContainer>
 
             <S.LiContainer>
-              <S.Link href="#">
+              <S.Link href="/medical/pacientes">
                 <i className="bx bx-folder"></i>
                 <span>Pacientes</span>
               </S.Link>
@@ -84,17 +84,17 @@ function Sidebar() {
               </S.Link>
             </S.LiContainer>
           </ul>
-
-          <S.AccountContainer>
-            <S.AccountImg>
-              <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
-            </S.AccountImg>
-            <S.DataText>
-              <span className="name">Bruno</span>
-              <span className="email">bruno@gmail.com</span>
-            </S.DataText>
-          </S.AccountContainer>
         </S.MenuContainer>
+
+        <S.AccountContainer>
+          <S.AccountImg>
+            <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
+          </S.AccountImg>
+          <S.DataText>
+            <span className="name">Bruno</span>
+            <span className="email">bruno@gmail.com</span>
+          </S.DataText>
+        </S.AccountContainer>
       </S.SidebarMenu>
     </>
   );
