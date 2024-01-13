@@ -3,8 +3,8 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
-// import { Address } from '../../../models/especialidade/enderecoModel';
 import { Doctor } from '../../../../models/especialidade/medicoModel';
+import Gender from '../../commom/Gender';
 import * as S from '../styles';
 
 interface Testes {
@@ -15,7 +15,6 @@ interface Testes {
 function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
   const { register, handleSubmit } = useForm();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmitForm = (data: any) => {
     console.log('teste');
     console.log(data);
@@ -24,7 +23,7 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
   return (
     <S.Container>
       <S.NavContainer>
-        <div>Novos Médico</div>
+        <h3>Novos Médico</h3>
         <Link href={'/medical/medicos'}>
           <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
             Cancelar
@@ -93,7 +92,25 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
           />
         </S.InputBox>
 
-        <div>
+        <Gender
+          label="Gênero"
+          options={[
+            { label: 'Masculino', value: 'MALE' },
+            { label: 'Feminino', value: 'FEMALE' },
+            { label: 'Outro', value: 'OTHER' },
+          ]}
+          selectedValue={datas.gender}
+          onChange={(value) => updateFiledHandler('gender', value)}
+        />
+      </S.ContentContainer>
+    </S.Container>
+  );
+}
+
+export default MedicoFormTeste;
+
+{
+  /* <div>
           <div>
             <label>Gênero</label>
           </div>
@@ -129,18 +146,5 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
             />
             Outro
           </label>
-        </div>
-        {/* 
-        <Button
-          type="submit"
-          variant="contained"
-          style={{ backgroundColor: '#4070f4', width: '100px' }}
-        >
-          Enviar
-        </Button> */}
-      </S.ContentContainer>
-    </S.Container>
-  );
+        </div> */
 }
-
-export default MedicoFormTeste;
