@@ -74,6 +74,10 @@ export const Link = styled.a`
   color: #707070;
   width: 100%;
 
+  > svg {
+    fill: #4260e7;
+  }
+
   &:hover {
     color: #fff;
     /* background-color: #4070f4; */
