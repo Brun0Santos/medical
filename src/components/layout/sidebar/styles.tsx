@@ -73,10 +73,7 @@ export const Link = styled.a`
   margin-bottom: 8px;
   color: #707070;
   width: 100%;
-
-  > svg {
-    fill: #4260e7;
-  }
+  cursor: pointer;
 
   &:hover {
     color: #fff;
