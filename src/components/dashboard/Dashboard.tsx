@@ -3,14 +3,17 @@ import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { CiPhone } from 'react-icons/ci';
 import { FcCalendar } from 'react-icons/fc';
+import { GoDeviceCameraVideo } from 'react-icons/go';
 
 // import logo from '../../../public/calendar.png';
 import Layout from '../layout/Layout';
+import ChartPacientes from './chart/pacientes/ChartPacientes';
+import Pesquisas from './chart/pesquisas/Pesquisas';
 import * as S from './styles';
 
 function Dashboard() {
   return (
-    <Layout title="Bem Vindo">
+    <Layout title="Painel Administrativo">
       <S.Title>👋Bem vindo, Bruno</S.Title>
       <S.ContainerEstatisticas>
         <S.ContainerVendas>
@@ -48,7 +51,7 @@ function Dashboard() {
 
         <S.ContainerVideo>
           <S.ImgVideo>
-            <CiPhone style={{ color: '#fff', fontSize: '36px' }} />
+            <GoDeviceCameraVideo style={{ color: '#fff', fontSize: '36px' }} />
           </S.ImgVideo>
 
           <S.DivInfo>
@@ -57,6 +60,11 @@ function Dashboard() {
           </S.DivInfo>
         </S.ContainerVideo>
       </S.ContainerEstatisticas>
+
+      <S.ContainerGrafico>
+        <Pesquisas />
+        <ChartPacientes />
+      </S.ContainerGrafico>
     </Layout>
   );
 }
