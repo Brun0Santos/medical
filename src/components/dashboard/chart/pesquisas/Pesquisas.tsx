@@ -14,7 +14,7 @@ function Pesquisas() {
   ];
 
   return (
-    <LineChart width={500} height={250} data={data} margin={{ top: 20, right: 20 }}>
+    <LineChart width={670} height={250} data={data} margin={{ top: 20, right: 20 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
