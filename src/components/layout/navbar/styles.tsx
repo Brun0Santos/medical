@@ -13,7 +13,7 @@ export const MenuInfoContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 190px;
-  background-color: #9e9a9a;
+  background: linear-gradient(to right, #3d3d3d, #575757);
   padding: 20px;
 `;
 
@@ -31,10 +31,6 @@ export const MenuNavbar = styled.ul`
 
   li {
     margin: 0 10px;
-    /* 
-    &:hover {
-      border-bottom: 3px solid #ffff;
-    } */
   }
 
   a {
@@ -91,6 +87,36 @@ export const DropDownMenu = styled.div`
 
     &:hover {
       color: #23a9f9;
+    }
+  }
+`;
+
+export const NumeroNotificacao = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 21px;
+  width: 21px;
+  border-radius: 50%;
+  background: #ed5564;
+  font-size: 20px;
+  color: #fff;
+  font-size: 12px;
+
+  position: absolute;
+  top: -5px;
+  right: -5px;
+`;
+
+export const ContainerNotificacao = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-right: 22px;
+  cursor: pointer;
+
+  &:hover {
+    > svg {
+      fill: #000;
     }
   }
 `;
