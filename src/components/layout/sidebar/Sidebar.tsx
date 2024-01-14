@@ -121,7 +121,7 @@ function Sidebar() {
           </S.AccountImg>
           <S.DataText>
             <span className="name">Bruno</span>
-            <span className="email">bruno@gmail.com</span>
+            <span className="email">Administrador</span>
           </S.DataText>
         </S.AccountContainer>
       </S.SidebarMenu>
