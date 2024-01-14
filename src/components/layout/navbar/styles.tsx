@@ -13,7 +13,7 @@ export const MenuInfoContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 190px;
-  background-color: #444;
+  background-color: #9e9a9a;
   padding: 20px;
 `;
 
@@ -31,10 +31,10 @@ export const MenuNavbar = styled.ul`
 
   li {
     margin: 0 10px;
-
+    /* 
     &:hover {
       border-bottom: 3px solid #ffff;
-    }
+    } */
   }
 
   a {
@@ -45,8 +45,9 @@ export const MenuNavbar = styled.ul`
 `;
 
 export const NameText = styled.div`
-  margin-right: 30px;
+  margin-right: 56px;
   color: #fff;
+  cursor: pointer;
 `;
 
 export const NavImage = styled.span`
@@ -73,4 +74,23 @@ export const OverlayContainer = styled.div`
   z-index: 2;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;
+
+export const DropDownMenu = styled.div`
+  width: 130px;
+  height: 400px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 4px;
+  position: fixed;
+
+  li {
+    list-style: none;
+
+    &:hover {
+      color: #23a9f9;
+    }
+  }
 `;
