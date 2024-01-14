@@ -2,9 +2,11 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
+import { IoNotificationsSharp } from 'react-icons/io5';
 
 import Logo from '../../../../public/d.jpg';
 import MenuDropDown from '../dropdown/menu/MenuDropDown';
+import NotificacaoDropDown from '../dropdown/notificacao/NotificacaoDropDown';
 import * as S from './styles';
 
 interface Title {
@@ -14,6 +16,7 @@ interface Title {
 
 function Navbar({ title, children }: Title) {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   return (
     <S.ContentContainer>
@@ -21,15 +24,20 @@ function Navbar({ title, children }: Title) {
         <S.Title>{title}</S.Title>
 
         <S.MenuNavbar>
-          <li>
-            <a href="#">Contato</a>
-          </li>
+          <div style={{ display: 'flex' }} onClick={() => setOpenNotification(!openNotification)}>
+            <S.ContainerNotificacao>
+              <IoNotificationsSharp style={{ fontSize: '27px', color: '#fff' }} />
+              <S.NumeroNotificacao>4</S.NumeroNotificacao>
+              {openNotification && <NotificacaoDropDown />}
+            </S.ContainerNotificacao>
+          </div>
+
           <S.NavImage>
             <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
           </S.NavImage>
 
           <S.NameText onClick={() => setOpenMenu(!openMenu)}>
-            <span>Bruno</span>
+            <h4>Bruno</h4>
             <div style={{ fontSize: '12px' }}>
               Administrador
               <IoIosArrowDown style={{ marginLeft: '10px', fontSize: '15px' }} />
