@@ -1,6 +1,10 @@
+'use client';
 import Image from 'next/image';
+import { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 
 import Logo from '../../../../public/d.jpg';
+import MenuDropDown from '../dropdown/menu/MenuDropDown';
 import * as S from './styles';
 
 interface Title {
@@ -9,20 +13,14 @@ interface Title {
 }
 
 function Navbar({ title, children }: Title) {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
   return (
     <S.ContentContainer>
       <S.MenuInfoContainer>
         <S.Title>{title}</S.Title>
+
         <S.MenuNavbar>
-          <li>
-            <a href="#">Início</a>
-          </li>
-          <li>
-            <a href="#">Sobre</a>
-          </li>
-          <li>
-            <a href="#">Serviços</a>
-          </li>
           <li>
             <a href="#">Contato</a>
           </li>
@@ -30,8 +28,13 @@ function Navbar({ title, children }: Title) {
             <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
           </S.NavImage>
 
-          <S.NameText>
+          <S.NameText onClick={() => setOpenMenu(!openMenu)}>
             <span>Bruno</span>
+            <div style={{ fontSize: '12px' }}>
+              Administrador
+              <IoIosArrowDown style={{ marginLeft: '10px', fontSize: '15px' }} />
+              {openMenu && <MenuDropDown />}
+            </div>
           </S.NameText>
         </S.MenuNavbar>
       </S.MenuInfoContainer>
