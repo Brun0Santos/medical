@@ -111,7 +111,24 @@ export const ContainerGrafico = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 50px;
+  margin-top: 45px;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;
+
+export const ContainerGraficoPizza = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 16px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;
+
+export const DivTitleGraficoPizza = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 400;
 `;
