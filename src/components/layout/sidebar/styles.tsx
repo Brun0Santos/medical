@@ -122,6 +122,7 @@ export const DataText = styled.div`
   flex-direction: column;
   margin-right: 30px;
   color: #fff;
+  cursor: pointer;
 
   .name {
     font-size: 18px;
