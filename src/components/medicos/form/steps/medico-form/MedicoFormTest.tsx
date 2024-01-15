@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
-import { Doctor } from '../../../../../models/especialidade/medicoModel';
+import { Doctor } from '../../../../../models/medico/medicoModel';
 import Gender from '../../../commom/Gender';
 import * as S from './styles';
 
@@ -24,7 +24,7 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
     <S.Container>
       <S.NavContainer>
         <h3>Novos Médico</h3>
-        <Link href={'/medical/medicos'}>
+        <Link href={'/medical/pacientes'}>
           <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
             Cancelar
           </Button>
