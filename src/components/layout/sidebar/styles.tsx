@@ -16,6 +16,7 @@ export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 44px;
 `;
 
 export const NavImage = styled.span`
@@ -40,7 +41,8 @@ export const LogoName = styled.span`
 export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: start;
+  align-items: start;
 `;
 
 export const MenuTitle = styled.div`
@@ -51,6 +53,8 @@ export const MenuTitle = styled.div`
 
   .title {
     margin-left: 15px;
+    color: #000;
+    font-size: 20px;
     transition: all 0.3s ease;
   }
 
@@ -73,6 +77,7 @@ export const Link = styled.a`
   margin-bottom: 8px;
   color: #707070;
   width: 100%;
+
   cursor: pointer;
 
   &:hover {
