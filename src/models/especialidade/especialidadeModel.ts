@@ -1,4 +1,4 @@
-import { Doctor } from './medicoModel';
+import { Doctor } from '../medico/medicoModel';
 
 export interface Speciality {
   id?: string;
