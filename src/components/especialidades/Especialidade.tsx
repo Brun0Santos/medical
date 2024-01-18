@@ -2,21 +2,30 @@
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+import { useSpecialityService } from '../../http/index';
 import { Speciality } from '../../models/especialidade/especialidadeModel';
+import { Page } from '../commom/pageable/especialidade/Speciality';
 import Layout from '../layout/Layout';
 import * as S from './styles';
 import TableEspecialidade from './table/TableEspecialidade';
 
 function Especialidade() {
   const router = useRouter();
-  const arrayEspecialidade: Array<Speciality> = [
-    { id: '1', description: 'Ortopedia muscular', name: 'Ortopedia' },
-    { id: '2', description: 'Ortopedia da perna', name: 'Ortopedia' },
-    { id: '3', description: 'Ortopedia do braço', name: 'Ortopedia' },
-    { id: '4', description: 'Ortopedia do mão', name: 'Ortopedia' },
-    { id: '5', description: 'Ortopedia do joelho', name: 'Ortopedia' },
-  ];
+
+  const [speciality, setSpeciality] = useState<Page<Speciality>>({
+    content: [],
+    first: 0,
+    number: 0,
+    size: 0,
+    totalElements: 0,
+    totalPages: 0,
+  });
+
+  const specialityService = useSpecialityService();
+
+  const [page, setPage] = useState<number>(0);
 
   const deletes = (especialidade: Speciality) => {
     console.log(especialidade);
@@ -26,11 +35,26 @@ function Especialidade() {
     router.push(`/medical/especialidades/nova-especialidade?id=${especialidade.id}`);
   };
 
+  const infoSpeciality = (especialidade: Speciality) => {
+    router.push(`/medical/especialidades/info?id=${especialidade.id}`);
+    setPage(0);
+  };
+
+  useEffect(() => {
+    try {
+      specialityService.getPageSpeciality('', page, 6).then((res) => {
+        setSpeciality(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [page]);
+
   return (
     <Layout title="Especialidades">
       <S.Container>
         <S.NavContainer>
-          <div>Especialidades</div>
+          <h4>Especialidades</h4>
           <Link href={'/medical/especialidades/nova-especialidade'}>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
               Nova Especialidade
@@ -41,7 +65,8 @@ function Especialidade() {
         <TableEspecialidade
           onEdit={edit}
           onDelete={deletes}
-          especialidade={arrayEspecialidade}
+          especialidade={speciality.content}
+          onInfo={infoSpeciality}
         ></TableEspecialidade>
       </S.Container>
     </Layout>
