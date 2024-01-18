@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { useClienteService } from '../../../http/index';
+import { useSpecialityService } from '../../../http/index';
 import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import { specialittValidationSchema } from '../../../validation/especialidade/specialityValidation';
 import Layout from '../../layout/Layout';
@@ -23,7 +23,7 @@ function EspecialidadeForm() {
     resolver: yupResolver(specialittValidationSchema),
   });
 
-  const service = useClienteService();
+  const service = useSpecialityService();
   const searchParams = useSearchParams();
   const searchId = searchParams.get('id');
 
