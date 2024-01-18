@@ -24,6 +24,18 @@ export const ButtonEdit = styled.div`
   margin-right: 10px;
 `;
 
+export const ButtonInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #796eff;
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
