@@ -5,52 +5,112 @@ import { useState } from 'react';
 import { FcNext, FcPrevious } from 'react-icons/fc';
 import { MdOutlineSend } from 'react-icons/md';
 
+import { Address } from '../../../models/endereco/enderecoModel';
+import { Doctor } from '../../../models/medico/medicoModel';
 import Layout from '../../layout/Layout';
+import DiasTrabalhoForm from '../form/steps/dias-trabalho/DiasTrabalhoForm';
 import MedicoFormContato from '../form/steps/endereco-form/MedicoEndereco';
 import EspecialidadesForm from '../form/steps/especialidades/EspecialidadesForm';
+import MedicoFormTeste from '../form/steps/medico-form/MedicoFormTest';
 import { useHookForm } from '../hooks/UseHookForm';
 import Steps from './Steps';
 import * as S from './styles';
-import UserForm from './UserForm';
 
-const formTemplate = {
-  name: '',
-  crm: '',
-  contact: '',
-  gender: 'OTHER',
-  email: '',
-  cpf: '',
-  specialities: [],
+// const formTemplate = {
+//   name: '',
+//   crm: '',
+//   contact: '',
+//   gender: 'OTHER',
+//   email: '',
+//   cpf: '',
+//   specialities: [],
 
-  zipCode: '',
-  number: '',
-  complement: '',
-  neighborhood: '',
-  city: '',
-  state: '',
+//   zipCode: '',
+//   number: '',
+//   complement: '',
+//   neighborhood: '',
+//   city: '',
+//   state: '',
 
-  workSchedules: [],
-};
+//   workSchedules: [],
+// };
 
 function Step() {
-  const [data, setData] = useState(formTemplate);
+  // const [data, setData] = useState(formTemplate);
+  const [data, setData] = useState<Doctor>({
+    id: '',
+    name: '',
+    crm: '',
+    contact: '',
+    gender: 'OTHER',
+    email: '',
+    cpf: '',
+    specialities: [],
+    address: {
+      city: '',
+      complement: '',
+      neighborhood: '',
+      state: '',
+      number: '',
+      zipCode: '',
+      id: '',
+    },
+    workSchedules: [],
+  });
 
-  const updateFiledHandler = (key: number, value: any) => {
+  const [address, setAddress] = useState<Address>({
+    city: '',
+    complement: '',
+    neighborhood: '',
+    state: '',
+    number: '',
+    zipCode: '',
+    id: '',
+  });
+
+  const updateFiledHandler = (key: string, value: any) => {
     setData((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
+  const updateFiledHandlerAddress = (key: string, value: any) => {
+    setAddress((prev) => {
       return { ...prev, [key]: value };
     });
   };
 
   // eslint-disable-next-line react/jsx-key
   const formsComponents = [
-    <UserForm datas={data} updateFiledHandler={updateFiledHandler} />,
-    <MedicoFormContato datas={data} updateFiledHandler={updateFiledHandler} />,
+    <MedicoFormTeste datas={data} updateFiledHandler={updateFiledHandler} />,
+    <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} />,
     <EspecialidadesForm datas={data} updateFiledHandler={updateFiledHandler} />,
-    <EspecialidadesForm datas={data} updateFiledHandler={updateFiledHandler} />,
+    <DiasTrabalhoForm />,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useHookForm(formsComponents);
+
+  const teste = () => {
+    const pessoa: Doctor = {
+      id: data.id,
+      name: data.name,
+      crm: data.crm,
+      gender: 'OTHER',
+      email: '',
+      cpf: '',
+      address: {
+        city: address.city,
+        complement: address.complement,
+        neighborhood: address.neighborhood,
+        state: address.state,
+        number: address.number,
+        zipCode: address.zipCode,
+      },
+    };
+
+    console.log(pessoa);
+  };
 
   return (
     <Layout title="Tela de cadastros">
@@ -74,7 +134,7 @@ function Step() {
 
           {isLastStep ? (
             <S.ButtonContainer>
-              <Button variant="contained">
+              <Button variant="contained" onClick={teste}>
                 <span>Enviar</span>
                 <MdOutlineSend />
               </Button>
