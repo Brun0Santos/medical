@@ -13,7 +13,7 @@ export const NavContainer = styled.div`
   padding-bottom: 40px;
 `;
 
-export const ContentContainer = styled.form`
+export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 30px;
