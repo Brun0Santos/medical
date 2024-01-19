@@ -40,3 +40,10 @@ export const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const InfoContainer = styled.span`
+  color: #fff;
+  background-color: #000;
+  border-radius: 7px;
+  padding: 3px;
+`;
