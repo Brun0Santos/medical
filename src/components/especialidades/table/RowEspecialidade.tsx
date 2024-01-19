@@ -21,8 +21,8 @@ const RowEspecialidade = ({ especialidade, onEdit, onDelete, onInfo }: Especiali
           {especialidade.name?.substring(0, 2).toLocaleLowerCase()}
         </Avatar>
       </TableCell>
-      <TableCell align="center" style={{ color: 'blue' }}>
-        {especialidade.name}
+      <TableCell align="center">
+        <S.InfoContainer>{especialidade.name}</S.InfoContainer>
       </TableCell>
       <TableCell align="center">{especialidade.summary}</TableCell>
       <TableCell align="left">
