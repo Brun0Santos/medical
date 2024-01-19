@@ -2,10 +2,11 @@
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
+import { Address } from '../../../../../models/endereco/enderecoModel';
 import * as S from './styles';
 
 interface Testes {
-  datas: any;
+  datas: Address;
   updateFiledHandler: any;
 }
 
