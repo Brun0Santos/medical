@@ -1,25 +1,38 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '@mui/material';
-import Link from 'next/link';
+import axios from 'axios';
+import { FiSearch } from 'react-icons/fi';
 
 import { Address } from '../../../../../models/endereco/enderecoModel';
 import * as S from './styles';
 
-interface Testes {
+interface MedicoFormContatoProps {
   datas: Address;
-  updateFiledHandler: any;
+  updateFiledHandler: (fieldName: string, value: string) => void;
 }
 
-function MedicoFormContato({ datas, updateFiledHandler }: Testes) {
+function MedicoFormContato({ datas, updateFiledHandler }: MedicoFormContatoProps) {
+  const getCep = async () => {
+    try {
+      await axios.get(`https://viacep.com.br/ws/${datas.zipCode}/json/`).then((info) => {
+        updateFiledHandler('neighborhood', info.data.bairro);
+        updateFiledHandler('city', info.data.localidade);
+        updateFiledHandler('state', info.data.uf);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <S.Container>
       <S.NavContainer>
         <h3>Endereço</h3>
-        <Link href={'/medical/medicos'}>
-          <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
-            Cancelar
-          </Button>
-        </Link>
+        <Button variant="contained" style={{ backgroundColor: '#659e6d' }} onClick={getCep}>
+          Buscar CEP
+          <span>
+            <FiSearch />
+          </span>
+        </Button>
       </S.NavContainer>
 
       <S.ContentContainer>
@@ -30,7 +43,7 @@ function MedicoFormContato({ datas, updateFiledHandler }: Testes) {
               type="text"
               id="zipCode"
               value={datas.zipCode}
-              placeholder="CEP do paciente"
+              placeholder="CEP"
               onChange={(e) => updateFiledHandler('zipCode', e.target.value)}
             />
           </S.InputBox>
@@ -62,7 +75,7 @@ function MedicoFormContato({ datas, updateFiledHandler }: Testes) {
           <S.InputBox>
             <S.LabelInput htmlFor="email">Bairro:</S.LabelInput>
             <input
-              type="email"
+              type="text"
               id="neighborhood"
               placeholder="Bairro"
               value={datas.neighborhood}
@@ -76,7 +89,7 @@ function MedicoFormContato({ datas, updateFiledHandler }: Testes) {
           <S.InputBox>
             <S.LabelInput htmlFor="cpf">Cidade:</S.LabelInput>
             <input
-              type="number"
+              type="text"
               id="city"
               placeholder="Cidade"
               value={datas.city}
@@ -88,7 +101,7 @@ function MedicoFormContato({ datas, updateFiledHandler }: Testes) {
           <S.InputBox>
             <S.LabelInput htmlFor="cpf">Estado:</S.LabelInput>
             <input
-              type="number"
+              type="text"
               id="state"
               placeholder="Estado"
               value={datas.state}
