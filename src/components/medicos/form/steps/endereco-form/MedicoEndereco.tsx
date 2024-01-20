@@ -1,5 +1,7 @@
+'use client';
 import { Button } from '@mui/material';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { FiSearch } from 'react-icons/fi';
 
 import { Address } from '../../../../../models/endereco/enderecoModel';
@@ -18,6 +20,7 @@ function MedicoFormContato({ datas, updateFiledHandler }: MedicoFormContatoProps
         updateFiledHandler('city', info.data.localidade);
         updateFiledHandler('state', info.data.uf);
       });
+      toast.success('Endereço encontrado!');
     } catch (error) {
       console.log(error);
     }
