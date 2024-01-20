@@ -1,1 +1,1 @@
-export { useClienteService } from './service/especialidadeService';
+export { useSpecialityService } from './service/especialidadeService';
