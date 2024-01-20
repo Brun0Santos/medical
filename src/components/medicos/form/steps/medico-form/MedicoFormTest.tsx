@@ -7,7 +7,7 @@ import * as S from './styles';
 
 interface Testes {
   datas: any;
-  updateFiledHandler: any;
+  updateFiledHandler: (fieldName: string, value: string) => void;
 }
 
 function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
@@ -62,7 +62,7 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
           <S.InputBox>
             <S.LabelInput htmlFor="email">E-mail:</S.LabelInput>
             <input
-              type="email"
+              type="text"
               id="email"
               placeholder="E-mail"
               value={datas.email}
@@ -73,7 +73,7 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
           <S.InputBox>
             <S.LabelInput htmlFor="cpf">CPF:</S.LabelInput>
             <input
-              type="number"
+              type="text"
               id="cpf"
               placeholder="CPF"
               value={datas.cpf}
