@@ -1,4 +1,5 @@
 import { Doctor } from '../medico/medicoModel';
+import { TimeInterval } from '../time-interval/timeIntervalModel';
 
 export interface WorkSchedule {
   id?: string;
@@ -11,4 +12,5 @@ export interface WorkSchedule {
     | 'SEXTA_FEIRA'
     | 'SABADO'
     | 'DOMINGO';
+  timeIntervals: Array<TimeInterval>;
 }
