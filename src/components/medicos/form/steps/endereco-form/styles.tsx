@@ -11,6 +11,16 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 40px;
+  text-align: center;
+  align-items: center;
+
+  svg {
+    margin-left: 5px;
+  }
+
+  span {
+    padding-top: 3px;
+  }
 `;
 
 export const ContentContainer = styled.div`
