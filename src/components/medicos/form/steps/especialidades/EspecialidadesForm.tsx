@@ -37,12 +37,9 @@ export default function EspecialidadesForm({ updateFiledHandler }: Testes) {
   }, []);
 
   const testess = (_: any, newValue: any) => {
-    console.log('oi');
-    console.log(newValue);
-
     const testes = especialidades.content.find((e) => e.name == newValue);
-    console.log(testes);
     if (testes) {
+      updateFiledHandler('id', String(testes.id));
       updateFiledHandler('name', String(testes.name));
       updateFiledHandler('summary', String(testes.summary));
       updateFiledHandler('description', String(testes.description));
@@ -60,7 +57,7 @@ export default function EspecialidadesForm({ updateFiledHandler }: Testes) {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={especialidades?.content.map((e) => e?.name)}
+          options={especialidades?.content.map((e) => e.name)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Especialidades" />}
           fullWidth
