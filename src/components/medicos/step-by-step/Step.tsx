@@ -6,6 +6,7 @@ import { FcNext, FcPrevious } from 'react-icons/fc';
 import { MdOutlineSend } from 'react-icons/md';
 
 import { Address } from '../../../models/endereco/enderecoModel';
+import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import { Doctor } from '../../../models/medico/medicoModel';
 import Layout from '../../layout/Layout';
 import DiasTrabalhoForm from '../form/steps/dias-trabalho/DiasTrabalhoForm';
@@ -45,7 +46,14 @@ function Step() {
     gender: 'OTHER',
     email: '',
     cpf: '',
-    specialities: [],
+    specialities: {
+      name: '',
+      id: '',
+      description: '',
+      registrationDate: '',
+      summary: '',
+    },
+
     address: {
       city: '',
       complement: '',
@@ -59,13 +67,21 @@ function Step() {
   });
 
   const [address, setAddress] = useState<Address>({
+    id: '',
     city: '',
     complement: '',
     neighborhood: '',
     state: '',
     number: '',
     zipCode: '',
+  });
+
+  const [speciality, setSpeciality] = useState<Speciality>({
     id: '',
+    name: '',
+    description: '',
+    registrationDate: '',
+    summary: '',
   });
 
   const updateFiledHandler = (key: string, value: any) => {
@@ -80,11 +96,16 @@ function Step() {
     });
   };
 
-  // eslint-disable-next-line react/jsx-key
+  const updateFiledHandlerSpeciality = (key: string, value: any) => {
+    setSpeciality((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
   const formsComponents = [
     <MedicoFormTeste datas={data} updateFiledHandler={updateFiledHandler} />,
     <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} />,
-    <EspecialidadesForm datas={data} updateFiledHandler={updateFiledHandler} />,
+    <EspecialidadesForm speciality={data} updateFiledHandler={updateFiledHandlerSpeciality} />,
     <DiasTrabalhoForm />,
   ];
 
@@ -97,8 +118,8 @@ function Step() {
       name: data.name,
       crm: data.crm,
       gender: 'OTHER',
-      email: '',
-      cpf: '',
+      email: data.email,
+      cpf: data.cpf,
       address: {
         city: address.city,
         complement: address.complement,
@@ -106,6 +127,13 @@ function Step() {
         state: address.state,
         number: address.number,
         zipCode: address.zipCode,
+      },
+      specialities: {
+        id: speciality.id,
+        name: speciality.name,
+        description: speciality.description,
+        registrationDate: speciality.registrationDate,
+        summary: speciality.summary,
       },
     };
 
