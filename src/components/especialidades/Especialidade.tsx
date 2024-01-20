@@ -56,7 +56,7 @@ function Especialidade() {
   useEffect(() => {
     try {
       specialityService
-        .getPageSpeciality('', page, 6)
+        .getPageSpeciality('', page, 19)
         .then((res) => {
           setSpeciality(res);
         })
@@ -64,7 +64,6 @@ function Especialidade() {
           toast.error('Nenhuma especialidade cadastrada');
         });
     } catch (error) {
-      toast.error('Nenhuma especialidade cadastrada');
       console.log(error);
     }
   }, [page, consulta]);
