@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 
-import { Doctor } from '../../../models/especialidade/medicoModel';
+import { Doctor } from '../../../models/medico/medicoModel';
 import * as S from './styles';
 interface DoctorList {
   doctor: Array<Doctor>;
