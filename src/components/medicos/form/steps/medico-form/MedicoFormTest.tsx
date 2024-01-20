@@ -2,11 +2,12 @@
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
+import { Doctor } from '../../../../../models/medico/medicoModel';
 import Gender from '../../../commom/Gender';
 import * as S from './styles';
 
 interface Testes {
-  datas: any;
+  datas: Doctor;
   updateFiledHandler: (fieldName: string, value: string) => void;
 }
 
