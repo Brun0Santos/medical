@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-key */
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FcNext, FcPrevious } from 'react-icons/fc';
 import { MdOutlineSend } from 'react-icons/md';
 
+import { useDoctorService } from '../../../http';
 import { Address } from '../../../models/endereco/enderecoModel';
 import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import { Doctor } from '../../../models/medico/medicoModel';
@@ -17,27 +17,7 @@ import { useHookForm } from '../hooks/UseHookForm';
 import Steps from './Steps';
 import * as S from './styles';
 
-// const formTemplate = {
-//   name: '',
-//   crm: '',
-//   contact: '',
-//   gender: 'OTHER',
-//   email: '',
-//   cpf: '',
-//   specialities: [],
-
-//   zipCode: '',
-//   number: '',
-//   complement: '',
-//   neighborhood: '',
-//   city: '',
-//   state: '',
-
-//   workSchedules: [],
-// };
-
 function Step() {
-  // const [data, setData] = useState(formTemplate);
   const [data, setData] = useState<Doctor>({
     id: '',
     name: '',
@@ -46,13 +26,15 @@ function Step() {
     gender: 'OTHER',
     email: '',
     cpf: '',
-    specialities: {
-      name: '',
-      id: '',
-      description: '',
-      registrationDate: '',
-      summary: '',
-    },
+    specialities: [
+      {
+        name: '',
+        id: '',
+        description: '',
+        registrationDate: '',
+        summary: '',
+      },
+    ],
 
     address: {
       city: '',
@@ -84,33 +66,39 @@ function Step() {
     summary: '',
   });
 
-  const updateFiledHandler = (key: string, value: any) => {
+  const updateFiledHandler = (key: string, value: string) => {
     setData((prev) => {
       return { ...prev, [key]: value };
     });
   };
 
-  const updateFiledHandlerAddress = (key: string, value: any) => {
+  const updateFiledHandlerAddress = (key: string, value: string) => {
     setAddress((prev) => {
       return { ...prev, [key]: value };
     });
   };
 
-  const updateFiledHandlerSpeciality = (key: string, value: any) => {
+  const updateFiledHandlerSpeciality = (key: string, value: string) => {
     setSpeciality((prev) => {
       return { ...prev, [key]: value };
     });
   };
 
   const formsComponents = [
-    <MedicoFormTeste datas={data} updateFiledHandler={updateFiledHandler} />,
-    <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} />,
-    <EspecialidadesForm speciality={data} updateFiledHandler={updateFiledHandlerSpeciality} />,
-    <DiasTrabalhoForm />,
+    <MedicoFormTeste datas={data} updateFiledHandler={updateFiledHandler} key={0} />,
+    <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} key={1} />,
+    <EspecialidadesForm
+      speciality={data}
+      updateFiledHandler={updateFiledHandlerSpeciality}
+      key={2}
+    />,
+    <DiasTrabalhoForm key={3} />,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useHookForm(formsComponents);
+
+  const doctorService = useDoctorService();
 
   const teste = () => {
     const pessoa: Doctor = {
@@ -120,6 +108,7 @@ function Step() {
       gender: 'OTHER',
       email: data.email,
       cpf: data.cpf,
+      contact: data.contact,
       address: {
         city: address.city,
         complement: address.complement,
@@ -128,14 +117,31 @@ function Step() {
         number: address.number,
         zipCode: address.zipCode,
       },
-      specialities: {
-        id: speciality.id,
-        name: speciality.name,
-        description: speciality.description,
-        registrationDate: speciality.registrationDate,
-        summary: speciality.summary,
-      },
+      specialities: [
+        {
+          id: speciality.id,
+          name: speciality.name,
+          description: speciality.description,
+          registrationDate: speciality.registrationDate,
+          summary: speciality.summary,
+        },
+      ],
+
+      workSchedules: [
+        {
+          daysOfWeek: 'SABADO',
+          timeIntervals: [{ startTime: '09:00:00', endTime: '12:30:00' }],
+        },
+      ],
     };
+
+    try {
+      doctorService.salvarMedico(pessoa).then(() => {
+        toast.success('Médico salvo com sucesso');
+      });
+    } catch (_) {
+      toast.error('Erro ao salvar doutor');
+    }
 
     console.log(pessoa);
   };
@@ -149,11 +155,7 @@ function Step() {
         <S.Actionbutton>
           {!isFirstStep && (
             <S.ButtonContainer>
-              <Button
-                variant="outlined"
-                onClick={() => changeStep(currentStep - 1)}
-                // style={{ backgroundColor: '#838383' }}
-              >
+              <Button variant="outlined" onClick={() => changeStep(currentStep - 1)}>
                 <FcPrevious />
                 <span>Voltar</span>
               </Button>
