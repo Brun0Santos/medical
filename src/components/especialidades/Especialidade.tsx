@@ -60,9 +60,8 @@ function Especialidade() {
         .then((res) => {
           setSpeciality(res);
         })
-        .catch(() => {
-          toast.error('Nenhuma especialidade cadastrada');
-        });
+        .catch(() => toast.error('Nenhuma especialidade cadastrada!'))
+        .catch(() => {});
     } catch (error) {
       console.log(error);
     }
