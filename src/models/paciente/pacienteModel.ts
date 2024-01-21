@@ -8,6 +8,6 @@ export interface Patient {
   email?: string;
   cpf?: string;
   profession?: string;
-  medicalInsurance?: 'INDIVIDUAL' | 'FAMILIAR' | 'COLETIVO' | 'EMPRESARIAL';
+  medicalInsurance?: 'INDIVIDUAL' | 'FAMILIAR' | 'COLETIVO' | 'EMPRESARIAL' | 'NENHUM';
   address?: Address;
 }
