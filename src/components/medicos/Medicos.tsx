@@ -1,83 +1,36 @@
+'use client';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import router from 'next/router';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { Address } from '../../models/especialidade/enderecoModel';
-import { Speciality } from '../../models/especialidade/especialidadeModel';
-import { Doctor } from '../../models/especialidade/medicoModel';
+import { useDoctorService } from '../../http';
+import { Doctor } from '../../models/medico/medicoModel';
 import Layout from '../layout/Layout';
 import * as S from './styles';
 import TableMedico from './table/TableMedico';
 
 function Medicos() {
-  const arrayEspecialidade: Array<Speciality> = [
-    { id: '1', description: 'Ortopedia muscular', name: 'Ortopedia' },
-  ];
+  const service = useDoctorService();
+  const [doctors, setDoctors] = useState<Array<Doctor>>([]);
 
-  const doctorAddress: Array<Address> = [
-    {
-      city: 'SP',
-      complement: 'Rua nova',
-      id: '1',
-      neighborhood: 'Nova York',
-      number: '12A',
-      state: 'SP',
-      zipCode: '342423',
-    },
-  ];
-
-  const doctorArrays: Array<Doctor> = [
-    {
-      id: '1',
-      address: doctorAddress,
-      sex: 'MALE',
-      name: 'Bruno',
-      cpf: '5343443434',
-      crm: '4343',
-      email: 'bruno@gmail.com',
-      contact: '1212121',
-      specialities: arrayEspecialidade,
-    },
-
-    {
-      id: '2',
-      address: doctorAddress,
-      sex: 'MALE',
-      name: 'Lucas',
-      cpf: '5343443434',
-      crm: '4343',
-      email: 'lucas@gmail.com',
-      contact: '1212121',
-      specialities: arrayEspecialidade,
-    },
-
-    {
-      id: '3',
-      address: doctorAddress,
-      sex: 'FEMALE',
-      name: 'Leticia',
-      cpf: '5343443434',
-      crm: '4343',
-      email: 'leticia@gmail.com',
-      contact: '1212121',
-      specialities: arrayEspecialidade,
-    },
-
-    {
-      id: '4',
-      address: doctorAddress,
-      sex: 'MALE',
-      name: 'Pedro',
-      cpf: '5343443434',
-      crm: '4343',
-      email: 'pedro@gmail.com',
-      contact: '1212121',
-      specialities: arrayEspecialidade,
-    },
-  ];
+  useEffect(() => {
+    try {
+      service.getAllDoctors('', 0, 5).then((data) => {
+        setDoctors(data.content);
+      });
+    } catch (error) {
+      toast.error('Um erro inesperado aconteceu!');
+    }
+  }, []);
 
   const deletes = (doctor: Doctor) => {
     console.log(doctor);
+  };
+
+  const infoDoctor = (doctor: Doctor) => {
+    router.push(`/medical/medicos/info?id=${doctor.id}`);
   };
 
   const edit = (doctor: Doctor) => {
@@ -85,7 +38,7 @@ function Medicos() {
   };
 
   return (
-    <Layout title="Especialidades">
+    <Layout title="Painel Administrativo">
       <S.Container>
         <S.NavContainer>
           <div>Médicos</div>
@@ -95,7 +48,7 @@ function Medicos() {
             </Button>
           </Link>
         </S.NavContainer>
-        <TableMedico doctor={doctorArrays} onEdit={edit} onDelete={deletes} />
+        <TableMedico doctor={doctors} onEdit={edit} onDelete={deletes} onInfo={infoDoctor} />
       </S.Container>
     </Layout>
   );
