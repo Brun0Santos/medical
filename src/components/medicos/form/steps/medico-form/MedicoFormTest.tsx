@@ -16,7 +16,7 @@ function MedicoFormTeste({ datas, updateFiledHandler }: Testes) {
     <S.Container>
       <S.NavContainer>
         <h3>Novos Médico</h3>
-        <Link href={'/medical/pacientes'}>
+        <Link href={'/medical/medicos'}>
           <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
             Cancelar
           </Button>
