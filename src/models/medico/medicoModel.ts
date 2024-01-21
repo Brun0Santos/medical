@@ -1,6 +1,5 @@
 import { Address } from '../endereco/enderecoModel';
 import { Speciality } from '../especialidade/especialidadeModel';
-import { WorkSchedule } from '../work/workScheduleModel';
 
 export interface Doctor {
   id?: string;
@@ -12,5 +11,4 @@ export interface Doctor {
   cpf?: string;
   specialities?: Array<Speciality>;
   address?: Address;
-  workSchedules?: Array<WorkSchedule>;
 }
