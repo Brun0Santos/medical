@@ -1,9 +1,9 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CiLocationArrow1 } from 'react-icons/ci';
 import { FaRegAddressCard } from 'react-icons/fa6';
 import { FaRegUser } from 'react-icons/fa6';
 import { GoGitMerge } from 'react-icons/go';
-import { RiCalendarCheckLine } from 'react-icons/ri';
 
 import * as S from './styles';
 
@@ -26,8 +26,8 @@ function Steps({ currentStep }: any) {
       </div>
 
       <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
-        <RiCalendarCheckLine />
-        <p>Dias de Trabalho</p>
+        <CiLocationArrow1 />
+        <p>Enviar</p>
       </div>
     </S.StepsContainer>
   );
