@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FcNext, FcPrevious } from 'react-icons/fc';
@@ -9,7 +10,7 @@ import { Address } from '../../../models/endereco/enderecoModel';
 import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import { Doctor } from '../../../models/medico/medicoModel';
 import Layout from '../../layout/Layout';
-import DiasTrabalhoForm from '../form/steps/dias-trabalho/DiasTrabalhoForm';
+import EnviarDadosBack from '../form/steps/dados-form/EnviarDadosBack';
 import MedicoFormContato from '../form/steps/endereco-form/MedicoEndereco';
 import EspecialidadesForm from '../form/steps/especialidades/EspecialidadesForm';
 import MedicoFormTeste from '../form/steps/medico-form/MedicoFormTest';
@@ -18,6 +19,7 @@ import Steps from './Steps';
 import * as S from './styles';
 
 function Step() {
+  const router = useRouter();
   const [data, setData] = useState<Doctor>({
     id: '',
     name: '',
@@ -45,7 +47,6 @@ function Step() {
       zipCode: '',
       id: '',
     },
-    workSchedules: [],
   });
 
   const [address, setAddress] = useState<Address>({
@@ -92,7 +93,7 @@ function Step() {
       updateFiledHandler={updateFiledHandlerSpeciality}
       key={2}
     />,
-    <DiasTrabalhoForm key={3} />,
+    <EnviarDadosBack key={3} />,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
@@ -105,7 +106,7 @@ function Step() {
       id: data.id,
       name: data.name,
       crm: data.crm,
-      gender: 'OTHER',
+      gender: data.gender,
       email: data.email,
       cpf: data.cpf,
       contact: data.contact,
@@ -126,18 +127,12 @@ function Step() {
           summary: speciality.summary,
         },
       ],
-
-      workSchedules: [
-        {
-          daysOfWeek: 'SABADO',
-          timeIntervals: [{ startTime: '09:00:00', endTime: '12:30:00' }],
-        },
-      ],
     };
 
     try {
       doctorService.salvarMedico(pessoa).then(() => {
-        toast.success('Médico salvo com sucesso');
+        toast.success('Médico cadastrado com sucesso!');
+        router.push(`/medical/medicos`);
       });
     } catch (_) {
       toast.error('Erro ao salvar doutor');
@@ -147,7 +142,7 @@ function Step() {
   };
 
   return (
-    <Layout title="Tela de cadastros">
+    <Layout title="Painel Administrativo">
       <Steps currentStep={currentStep} />
       <div onSubmit={(e) => changeStep(currentStep + 1, e)}>
         <div className="inputs-container">{currentComponent}</div>
