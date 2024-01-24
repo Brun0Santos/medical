@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { HiOutlineUser } from 'react-icons/hi2';
 import { IoCalendarNumberOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdOutlineLogout } from 'react-icons/md';
@@ -9,15 +10,16 @@ function MenuDropDown() {
   return (
     <S.MenuContainer>
       <ul>
-        <S.LiInfo>
-          <S.NavImage>
-            <i>
-              <HiOutlineUser style={{ fontSize: '17px' }} />
-            </i>
-          </S.NavImage>
-          <S.LiTitle>Perfil</S.LiTitle>
-        </S.LiInfo>
-
+        <Link href={'/medical/perfil'} legacyBehavior>
+          <S.LiInfo>
+            <S.NavImage>
+              <i>
+                <HiOutlineUser style={{ fontSize: '17px' }} />
+              </i>
+            </S.NavImage>
+            <S.LiTitle>Perfil</S.LiTitle>
+          </S.LiInfo>
+        </Link>
         <S.LiInfo>
           <S.NavImage>
             <i>
