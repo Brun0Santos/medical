@@ -1,38 +1,28 @@
-'use client';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import router from 'next/router';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { Address } from '../../models/endereco/enderecoModel';
+import { usePatienteService } from '../../http';
 import { Patient } from '../../models/paciente/pacienteModel';
 import Layout from '../layout/Layout';
 import * as S from './styles';
 import TablePacientes from './table/TablePacientes';
 
 function Pacientes() {
-  const pacienteAddress: Address = {
-    city: 'SP',
-    complement: 'Rua nova',
-    id: '1',
-    neighborhood: 'Nova York',
-    number: '12A',
-    state: 'SP',
-    zipCode: '342423',
-  };
+  const [patients, setPatients] = useState<Array<Patient>>([]);
+  const patientService = usePatienteService();
 
-  const pacienteList: Array<Patient> = [
-    {
-      id: '1',
-      name: 'Felipe',
-      contact: '98989898',
-      gender: 'MALE',
-      email: 'felipe@gmail.com',
-      cpf: '9898902839',
-      profession: 'P.O',
-      medicalInsurance: 'INDIVIDUAL',
-      address: pacienteAddress,
-    },
-  ];
+  useEffect(() => {
+    try {
+      patientService.getAllPacients('', 0, 7).then((data) => {
+        setPatients(data.content);
+      });
+    } catch (error) {
+      toast.error('Algum erro inesperado aconteceu!');
+    }
+  }, []);
 
   const deletes = (paciente: Patient) => {
     console.log(paciente);
@@ -42,18 +32,23 @@ function Pacientes() {
     router.push(`/medical/pacientes/novo-paciente?id=${dpaciente.id}`);
   };
 
+  const info = (patient: Patient) => {
+    router.push(`/medical/pacientes/info?id=${patient.id}`);
+  };
+
   return (
-    <Layout title="Especialidades">
+    <Layout title="Pacientes">
       <S.Container>
         <S.NavContainer>
-          <div>Pacientes</div>
+          <h3>Pacientes</h3>
           <Link href={'/medical/pacientes/novo-paciente'}>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
               Novo Paciente
             </Button>
           </Link>
         </S.NavContainer>
-        <TablePacientes patient={pacienteList} onEdit={edit} onDelete={deletes} />
+
+        <TablePacientes patient={patients} onEdit={edit} onDelete={deletes} onInfo={info} />
       </S.Container>
     </Layout>
   );
