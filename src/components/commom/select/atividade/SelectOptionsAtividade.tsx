@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
 
-import { Doctor } from '../../../../models/medico/medicoModel';
+import { Speciality } from '../../../../models/especialidade/especialidadeModel';
 
 // interface OptionsSelect {
 //   value: string;
@@ -8,7 +8,7 @@ import { Doctor } from '../../../../models/medico/medicoModel';
 // }
 
 interface SelectProps {
-  options: Array<Doctor>;
+  options: Array<Speciality>;
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -16,8 +16,9 @@ interface SelectProps {
 const SelectOptionsAtividade: FC<SelectProps> = ({ options, value, onChange }) => {
   return (
     <select value={value} onChange={onChange}>
+      <option value="">Escolha uma especialidade</option>
       {options.map((option) => (
-        <option key={option.id} value={option.name}>
+        <option key={option.id} value={option.id}>
           {option.name}
         </option>
       ))}
