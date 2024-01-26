@@ -40,3 +40,17 @@ export const ButtonInfo = styled.div`
   cursor: pointer;
   margin-right: 10px;
 `;
+
+export const InfoContainer = styled.span`
+  color: #fff;
+  background-color: #4764e9;
+  border-radius: 7px;
+  padding: 3px;
+`;
+
+export const StatusContainer = styled.span`
+  border-radius: 7px;
+  padding: 3px;
+  background: #e9e9e9;
+  box-shadow: 0 0 10px rgba(1, 1, 0, 0.1);
+`;
