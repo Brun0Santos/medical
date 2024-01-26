@@ -13,6 +13,17 @@ interface EspecialidadeRowProps {
   onInfo: (especialidade: Speciality) => void;
 }
 
+type EspecialidadesCores = {
+  [key: string]: string;
+};
+
+const especialidadesCores: EspecialidadesCores = {
+  Cardiologia: '#FF5733',
+  Dermatologia: '#158374',
+  Ortopedia: '#5733FF',
+  Odontologia: '#ffa052',
+};
+
 const RowEspecialidade = ({ especialidade, onEdit, onDelete, onInfo }: EspecialidadeRowProps) => {
   return (
     <TableRow key={especialidade.id}>
@@ -22,7 +33,14 @@ const RowEspecialidade = ({ especialidade, onEdit, onDelete, onInfo }: Especiali
         </Avatar>
       </TableCell>
       <TableCell align="center">
-        <S.InfoContainer>{especialidade.name}</S.InfoContainer>
+        <S.InfoContainer
+          style={{
+            background:
+              especialidade.name !== undefined ? especialidadesCores[especialidade?.name] : 0,
+          }}
+        >
+          {especialidade.name}
+        </S.InfoContainer>
       </TableCell>
       <TableCell align="center">{especialidade.summary}</TableCell>
       <TableCell align="left">
