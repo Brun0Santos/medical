@@ -8,11 +8,16 @@ import { useRegisterService } from '../../http';
 import { Patient } from '../../models/paciente/pacienteModel';
 import { Registro } from '../../models/registro/registroModel';
 import Layout from '../layout/Layout';
+import InfoModal from './modal/InfoModal';
+import Modal from './modal/Modal';
 import * as S from './styles';
 import TabelaRegistro from './table/TabelaRegistro';
 
 function Registros() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [registro, setRegistro] = useState<Array<Registro>>([]);
+  const [registroModal, setRegistroModal] = useState<Registro>();
   const registroService = useRegisterService();
 
   useEffect(() => {
@@ -34,7 +39,14 @@ function Registros() {
   };
 
   const info = (patient: Patient) => {
-    router.push(`/medical/pacientes/info?id=${patient.id}`);
+    setRegistroModal(patient);
+    setIsModalOpen(true);
+
+    // router.push(`/medical/pacientes/info?id=${patient.id}`);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -51,6 +63,12 @@ function Registros() {
 
         <TabelaRegistro registro={registro} onEdit={edit} onDelete={deletes} onInfo={info} />
       </S.Container>
+
+      {isModalOpen && (
+        <Modal onClose={handleCloseModal}>
+          <InfoModal closeModal={handleCloseModal} registro={registroModal} />
+        </Modal>
+      )}
     </Layout>
   );
 }
