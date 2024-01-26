@@ -10,6 +10,7 @@ import { Registro } from '../../../models/registro/registroModel';
 import SelectOptionsAtividade from '../../commom/select/atividade/SelectOptionsAtividade';
 import SelectOptionsDoctorBySpeciality from '../../commom/select/atividade/SelectOptionsDoctorBySpeciality';
 import SelectOptions from '../../commom/select/paciente/SelectOptions';
+import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function RegistroForm() {
@@ -91,89 +92,91 @@ function RegistroForm() {
   ];
 
   return (
-    <S.Container>
-      <S.NavContainer>
-        <h2>Registrar Atividade</h2>
-        <Link href={'/medical/pacientes'}>
-          <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
-            Cancelar
-          </Button>
-        </Link>
-      </S.NavContainer>
+    <Layout title="Painel Administrativo">
+      <S.Container>
+        <S.NavContainer>
+          <h2>Registrar Atividade</h2>
+          <Link href={'/medical/registros'}>
+            <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
+              Cancelar
+            </Button>
+          </Link>
+        </S.NavContainer>
 
-      <S.ContentContainer>
-        <S.InputBox>
-          <S.LabelInput htmlFor="name">Descrição</S.LabelInput>
-          <input
-            type="text"
-            id="name"
-            placeholder="Decrição do atividade"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </S.InputBox>
-
-        <S.SelectContainer>
-          <S.LabelInput htmlFor="name">Especialidade</S.LabelInput>
-          <SelectOptionsAtividade
-            options={speciality}
-            value={specialityId}
-            onChange={handleSelectChange}
-          />
-        </S.SelectContainer>
-
-        <S.SelectContainer>
-          <S.LabelInput htmlFor="name">Profissional</S.LabelInput>
-          <SelectOptionsDoctorBySpeciality
-            options={doctorBySpeciality}
-            value={doctorId}
-            onChange={handleSelectChangeDoctor}
-          />
-        </S.SelectContainer>
-
-        <S.CentroContainer>
+        <S.ContentContainer>
           <S.InputBox>
-            <S.LabelInput htmlFor="cpf">Data</S.LabelInput>
-            <input
-              type="date"
-              id="cpf"
-              placeholder="Data"
-              value={serviceDateTime}
-              onChange={(e) => SetServiceDateTime(e.target.value)}
-            />
-          </S.InputBox>
-
-          <S.InputBox>
-            <S.LabelInput htmlFor="profession">Atividade:</S.LabelInput>
+            <S.LabelInput htmlFor="name">Descrição</S.LabelInput>
             <input
               type="text"
-              id="profession"
-              placeholder="Profissão"
-              value={profession}
-              onChange={(e) => setProfession(e.target.value)}
+              id="name"
+              placeholder="Decrição do atividade"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </S.InputBox>
-        </S.CentroContainer>
 
-        <S.SelectContainer>
-          <label>Categoria</label>
-          <SelectOptions
-            options={options}
-            // value={String(data?.medicalInsurance)}
-            onChange={(e) => setTypeMedicalAppointment(e.target.value)}
-          />
-        </S.SelectContainer>
+          <S.SelectContainer>
+            <S.LabelInput htmlFor="name">Especialidade</S.LabelInput>
+            <SelectOptionsAtividade
+              options={speciality}
+              value={specialityId}
+              onChange={handleSelectChange}
+            />
+          </S.SelectContainer>
 
-        <Button
-          type="submit"
-          variant="contained"
-          style={{ backgroundColor: '#4070f4', width: '100px', marginTop: '16px' }}
-          onClick={registrar}
-        >
-          Registrar
-        </Button>
-      </S.ContentContainer>
-    </S.Container>
+          <S.SelectContainer>
+            <S.LabelInput htmlFor="name">Profissional</S.LabelInput>
+            <SelectOptionsDoctorBySpeciality
+              options={doctorBySpeciality}
+              value={doctorId}
+              onChange={handleSelectChangeDoctor}
+            />
+          </S.SelectContainer>
+
+          <S.CentroContainer>
+            <S.InputBox>
+              <S.LabelInput htmlFor="cpf">Data</S.LabelInput>
+              <input
+                type="date"
+                id="cpf"
+                placeholder="Data"
+                value={serviceDateTime}
+                onChange={(e) => SetServiceDateTime(e.target.value)}
+              />
+            </S.InputBox>
+
+            <S.InputBox>
+              <S.LabelInput htmlFor="profession">Atividade:</S.LabelInput>
+              <input
+                type="text"
+                id="profession"
+                placeholder="Profissão"
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
+              />
+            </S.InputBox>
+          </S.CentroContainer>
+
+          <S.SelectContainer>
+            <label>Categoria</label>
+            <SelectOptions
+              options={options}
+              // value={String(data?.medicalInsurance)}
+              onChange={(e) => setTypeMedicalAppointment(e.target.value)}
+            />
+          </S.SelectContainer>
+
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: '#4070f4', width: '100px', marginTop: '16px' }}
+            onClick={registrar}
+          >
+            Registrar
+          </Button>
+        </S.ContentContainer>
+      </S.Container>
+    </Layout>
   );
 }
 
