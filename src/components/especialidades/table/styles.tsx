@@ -43,7 +43,7 @@ export const ButtonGroup = styled.div`
 
 export const InfoContainer = styled.span`
   color: #fff;
-  background-color: #000;
+
   border-radius: 7px;
-  padding: 3px;
+  padding: 4px;
 `;
