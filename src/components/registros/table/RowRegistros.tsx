@@ -26,6 +26,16 @@ const registroCores: RegistrosCores = {
 };
 
 const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
+  // const [isVisibleInfo, setIsVisibleInfo] = useState<boolean>(false);
+
+  // const t = () => {
+  //   setIsVisibleInfo(true);
+  // };
+
+  // const out = () => {
+  //   setIsVisibleInfo(false);
+  // };
+
   return (
     <TableRow key={registro.id} className="slow">
       <TableCell align="left">
