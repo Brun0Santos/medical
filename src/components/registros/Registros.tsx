@@ -49,11 +49,23 @@ function Registros() {
     setIsModalOpen(false);
   };
 
+  const confirmAppointment = () => {
+    toast.success('Consulta registrada com sucesso!');
+    setIsModalOpen(false);
+  };
+
   return (
     <Layout title="Pacientes">
       <S.Container>
         <S.NavContainer>
           <h3>Atividades</h3>
+
+          <div>
+            <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
+              Filtar
+            </Button>
+          </div>
+
           <Link href={'/medical/registros/novo'}>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
               Novo Registro
@@ -66,7 +78,11 @@ function Registros() {
 
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
-          <InfoModal closeModal={handleCloseModal} registro={registroModal} />
+          <InfoModal
+            closeModal={handleCloseModal}
+            registro={registroModal}
+            confirmAppointment={confirmAppointment}
+          />
         </Modal>
       )}
     </Layout>
