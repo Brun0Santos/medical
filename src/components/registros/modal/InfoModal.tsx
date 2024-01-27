@@ -1,12 +1,18 @@
 import React from 'react';
+import { HiOutlineClipboardList } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
+import { IoCalendarNumberOutline } from 'react-icons/io5';
 import { MdOutlineDescription } from 'react-icons/md';
+import { TbFileDescription } from 'react-icons/tb';
+import { TiTag } from 'react-icons/ti';
 
 import { Registro } from '../../../models/registro/registroModel';
 import * as S from './styles';
 
 interface ModalProps {
   closeModal: () => void;
+  confirmAppointment?: () => void;
+  rejectAppointment?: () => void;
   categoria?: string;
   descricao?: string;
   data?: string;
@@ -25,7 +31,7 @@ const registroCores: RegistrosCores = {
   REJEITADO: '#ffa052',
 };
 
-function InfoModal({ closeModal, registro }: ModalProps) {
+function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment }: ModalProps) {
   return (
     <div>
       <S.TitleModal>
@@ -41,22 +47,34 @@ function InfoModal({ closeModal, registro }: ModalProps) {
 
       <S.InfoModal>
         <S.ContentModal>
-          <label htmlFor="">Categoria</label>
-          <span>{registro?.typeMedicalAppointment}</span>
+          <label htmlFor="">
+            Categoria
+            <HiOutlineClipboardList />
+          </label>
+          <S.InfoContainer>{registro?.typeMedicalAppointment}</S.InfoContainer>
         </S.ContentModal>
 
         <S.ContentModal>
-          <label htmlFor="">Descrição</label>
+          <label htmlFor="">
+            Descrição
+            <TbFileDescription />
+          </label>
           <span>{registro?.description}</span>
         </S.ContentModal>
 
         <S.ContentModal>
-          <label htmlFor="">Data</label>
+          <label htmlFor="">
+            Data
+            <IoCalendarNumberOutline />
+          </label>
           <span>{registro?.serviceDateTime}</span>
         </S.ContentModal>
 
         <S.ContentModal>
-          <label htmlFor="">Status</label>
+          <label htmlFor="">
+            Status
+            <TiTag />
+          </label>
           <span
             style={{
               color:
@@ -70,8 +88,8 @@ function InfoModal({ closeModal, registro }: ModalProps) {
 
           {registro?.appointmentStatus == 'AGUARDANDO' && (
             <S.ContentButtonModal>
-              <S.ButtonConfirmar>Confirmar</S.ButtonConfirmar>
-              <S.ButtonRejeitar>Rejeitar</S.ButtonRejeitar>
+              <S.ButtonConfirmar onClick={confirmAppointment}>Confirmar</S.ButtonConfirmar>
+              <S.ButtonRejeitar onClick={rejectAppointment}>Rejeitar</S.ButtonRejeitar>
             </S.ContentButtonModal>
           )}
         </S.ContentModal>
