@@ -12,3 +12,8 @@ export interface Doctor {
   specialities?: Array<Speciality>;
   address?: Address;
 }
+
+export interface DoctorBySpeciality {
+  doctorId: string;
+  nameDoctor: string;
+}
