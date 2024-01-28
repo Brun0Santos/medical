@@ -16,6 +16,12 @@ export const useRegisterService = () => {
     return response.data;
   };
 
+  const getALlRegister = async (): Promise<Array<Registro>> => {
+    const response: AxiosResponse<Array<Registro>> =
+      await httpCliente.get<Array<Registro>>(resourceUrl);
+    return response.data;
+  };
+
   const saveRegister = async (registro: Registro): Promise<Registro> => {
     const response: AxiosResponse<Registro> = await httpCliente.post<Registro>(
       resourceUrl,
@@ -26,6 +32,7 @@ export const useRegisterService = () => {
 
   return {
     getAllDoctorsBySpeciality,
+    getALlRegister,
     saveRegister,
   };
 };
