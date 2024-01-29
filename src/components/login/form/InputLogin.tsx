@@ -1,18 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaLock, FaUser } from 'react-icons/fa';
 import { TbSend } from 'react-icons/tb';
 
 import { useLoginService } from '../../../http';
-import { Login } from '../../../models/login/loginModel';
 import { loginValidationSchema } from '../../../validation/login/loginValidation';
 import * as S from './styles';
 
+interface Teste {
+  login?: string;
+  password?: string;
+}
+
 const Inputlogin = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const service = useLoginService();
   const {
@@ -24,20 +32,38 @@ const Inputlogin = () => {
     resolver: yupResolver(loginValidationSchema),
   });
 
-  const handleSubmitForm = async (data: Login) => {
-    try {
-      await toast.promise(service.login(data), {
-        loading: 'Salvando especialidade...',
-        success: () => 'Login realizado com sucesso!',
-        error: 'Erro ao realizar o login!',
-      });
-      setValue('login', '');
-      setValue('password', '');
-      router.push('/medical/home');
-    } catch (_) {
-      console.error('Erro:');
-    }
+  const handleSubmitForm = async (data: Teste) => {
+    await signIn('login', {
+      login: data.login,
+      password: data.password,
+      redirect: false,
+    }).then((data) => {
+      console.log('sucesso');
+      // console.log(data);
+      // router.replace('/medical/home');
+    });
+    console.log(data.password);
+
+    // try {
+    //   await toast.promise(service.login(data), {
+    //     loading: 'Salvando especialidade...',
+    //     success: () => 'Login realizado com sucesso!',
+    //     error: 'Erro ao realizar o login!',
+    //   });
+    //   setValue('login', '');
+    //   setValue('password', '');
+    //   // router.push('/medical/home');
+    // } catch (_) {
+    //   console.error('Erro:');
+    // }
   };
+
+  useEffect(() => {
+    if (session) {
+      console.log(session?.token);
+      console.log(session?.role);
+    }
+  }, [session]);
 
   return (
     <S.FormContainers onSubmit={handleSubmit(handleSubmitForm)}>
