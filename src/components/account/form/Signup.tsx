@@ -59,7 +59,7 @@ const Input = styled.input`
   font-size: 14px;
 
   &:focus {
-    border: 1px solid #95bda9;
+    border: 2px solid #95bda9;
   }
 `;
 
@@ -91,7 +91,7 @@ const Signup = () => {
             <S.LinkForm>
               <span>
                 Tem uma conta?&nbsp;
-                <Link href={'/sign-in'} className="signup-link">
+                <Link href={'/medical/sign-in'} className="signup-link">
                   Faça login agora
                 </Link>
               </span>
