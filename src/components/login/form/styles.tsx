@@ -6,8 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100%;
-  /* background: #ffffff; */
-  background: linear-gradient(to right, #ffffff, #d8fce6);
+  background: #ffffff;
 `;
 
 export const FormInput = styled.div`
