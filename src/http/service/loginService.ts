@@ -5,8 +5,13 @@ import { httpCliente } from '../routes/routes';
 
 const resourceUrl: string = '/api/v1/auth';
 
+interface LoginProps {
+  login?: string;
+  password?: string;
+}
+
 export const useLoginService = () => {
-  const login = async (login: Login): Promise<Login> => {
+  const login = async (login: LoginProps): Promise<Login> => {
     const response: AxiosResponse<Login> = await httpCliente.post<Login>(resourceUrl, login);
     return response.data;
   };
