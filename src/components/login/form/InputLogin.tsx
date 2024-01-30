@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { FaLock, FaUser } from 'react-icons/fa';
 import { TbSend } from 'react-icons/tb';
 
-import { useLoginService } from '../../../http';
+// import { useLoginService } from '../../../http';
 import { loginValidationSchema } from '../../../validation/login/loginValidation';
 import * as S from './styles';
 
@@ -22,46 +22,45 @@ const Inputlogin = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const service = useLoginService();
+  // const service = useLoginService();
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginValidationSchema),
   });
 
   const handleSubmitForm = async (data: Teste) => {
-    await signIn('login', {
-      login: data.login,
-      password: data.password,
-      redirect: false,
-    }).then((data) => {
-      console.log('sucesso');
-      // console.log(data);
-      // router.replace('/medical/home');
-    });
-    console.log(data.password);
+    try {
+      await toast.promise(
+        signIn('login', {
+          login: data.login,
+          password: data.password,
+          redirect: false,
+        }),
+        {
+          loading: 'Autenticando!',
+          success: () => 'Autenticação realizada com sucesso!',
+          error: 'Erro ao se autenticar!',
+        },
+      );
 
-    // try {
-    //   await toast.promise(service.login(data), {
-    //     loading: 'Salvando especialidade...',
-    //     success: () => 'Login realizado com sucesso!',
-    //     error: 'Erro ao realizar o login!',
-    //   });
-    //   setValue('login', '');
-    //   setValue('password', '');
-    //   // router.push('/medical/home');
-    // } catch (_) {
-    //   console.error('Erro:');
-    // }
+      console.log(session?.token);
+
+      router.push('/medical/home');
+    } catch (_) {
+      console.error('Erro:');
+    }
   };
 
   useEffect(() => {
-    if (session) {
-      console.log(session?.token);
-      console.log(session?.role);
+    if (session?.token) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + session?.token;
+      localStorage.setItem('token', session?.token);
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+      localStorage.removeItem('token');
     }
   }, [session]);
 
