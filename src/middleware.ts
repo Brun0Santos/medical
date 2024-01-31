@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -9,7 +10,7 @@ export default function middleware(request: NextRequest) {
     if (request.nextUrl.pathname === '/medical/sign-in') {
       return NextResponse.next();
     }
-    console.log('rota n autorizada');
+    Cookies.remove('token');
     return NextResponse.redirect(signUrl);
   }
 }
