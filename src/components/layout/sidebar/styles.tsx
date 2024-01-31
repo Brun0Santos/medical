@@ -75,15 +75,16 @@ export const Link = styled.a`
   text-decoration: none;
   border-radius: 8px;
   margin-bottom: 8px;
-  color: #707070;
+  /* color: #707070; */
+  color: #000;
   width: 100%;
 
   cursor: pointer;
 
   &:hover {
-    color: #fff;
+    color: #000;
     /* background-color: #4070f4; */
-    background-color: #0c0b1a;
+    background-color: #cce6da;
   }
 
   span {
