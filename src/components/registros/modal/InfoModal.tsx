@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
@@ -6,6 +6,7 @@ import { MdOutlineDescription } from 'react-icons/md';
 import { TbFileDescription } from 'react-icons/tb';
 import { TiTag } from 'react-icons/ti';
 
+import { LoginContext } from '../../../context/LoginContext';
 import { Registro } from '../../../models/registro/registroModel';
 import * as S from './styles';
 
@@ -32,6 +33,8 @@ const registroCores: RegistrosCores = {
 };
 
 function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment }: ModalProps) {
+  const { token } = useContext(LoginContext);
+
   return (
     <div>
       <S.TitleModal>
@@ -88,8 +91,12 @@ function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment
 
           {registro?.appointmentStatus == 'AGUARDANDO' && (
             <S.ContentButtonModal>
-              <S.ButtonConfirmar onClick={confirmAppointment}>Confirmar</S.ButtonConfirmar>
-              <S.ButtonRejeitar onClick={rejectAppointment}>Rejeitar</S.ButtonRejeitar>
+              {token?.role !== 'PATIENT' && (
+                <S.ButtonConfirmar onClick={confirmAppointment}>Confirmar</S.ButtonConfirmar>
+              )}
+              <S.ButtonRejeitar onClick={rejectAppointment}>
+                {token?.role == 'PATIENT' ? 'Cancelar' : 'Rejeitar'}
+              </S.ButtonRejeitar>
             </S.ContentButtonModal>
           )}
         </S.ContentModal>
