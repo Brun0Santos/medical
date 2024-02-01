@@ -1,11 +1,16 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Logo from '../../../../public/d.jpg';
+import { LoginContext } from '../../../context/LoginContext';
 import AdminView from '../../perfis/admin/AdminView';
+import MedicoView from '../../perfis/medico/MedicoView';
+import PacienteView from '../../perfis/paciente/PacienteView';
 import * as S from './styles';
 
 function Sidebar() {
+  const { token } = useContext(LoginContext);
+
   return (
     <>
       <S.SidebarMenu>
@@ -18,7 +23,9 @@ function Sidebar() {
             <S.LogoName>Brunos Medical</S.LogoName>
           </S.LogoContainer>
 
-          <AdminView />
+          {token?.role == 'ADMIN' && <AdminView />}
+          {token?.role == 'PATIENT' && <PacienteView />}
+          {token?.role == 'DOCTOR' && <MedicoView />}
         </div>
 
         <S.AccountContainer>
@@ -26,7 +33,7 @@ function Sidebar() {
             <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
           </S.AccountImg>
           <S.DataText>
-            <span className="name">Bruno</span>
+            <span className="name">{token?.login}</span>
             <span className="email">Administrador</span>
           </S.DataText>
         </S.AccountContainer>
