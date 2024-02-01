@@ -7,11 +7,11 @@ import { GoDeviceCameraVideo } from 'react-icons/go';
 
 // import logo from '../../../public/calendar.png';
 import Layout from '../layout/Layout';
-import DadosAntedimento from './chart/atendimento/DadosAtendimento';
-import DadosMedicos from './chart/dados-medicos/DadosMedicos';
-import DadosPacientes from './chart/dados-pacientes/DadosPacientes';
-import ChartPacientes from './chart/pacientes/ChartPacientes';
-import Pesquisas from './chart/pesquisas/Pesquisas';
+// import DadosAntedimento from './chart/atendimento/DadosAtendimento';
+// import DadosMedicos from './chart/dados-medicos/DadosMedicos';
+// import DadosPacientes from './chart/dados-pacientes/DadosPacientes';
+// import ChartPacientes from './chart/pacientes/ChartPacientes';
+// import Pesquisas from './chart/pesquisas/Pesquisas';
 import * as S from './styles';
 
 function Dashboard() {
@@ -64,7 +64,7 @@ function Dashboard() {
         </S.ContainerVideo>
       </S.ContainerEstatisticas>
 
-      <S.ContainerGrafico>
+      {/* <S.ContainerGrafico>
         <Pesquisas />
         <ChartPacientes />
       </S.ContainerGrafico>
@@ -84,7 +84,7 @@ function Dashboard() {
           <span>Atendimento</span>
           <DadosAntedimento />
         </S.DivTitleGraficoPizza>
-      </S.ContainerGraficoPizza>
+      </S.ContainerGraficoPizza> */}
     </Layout>
   );
 }
