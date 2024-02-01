@@ -31,12 +31,14 @@ function PacienteView() {
 
         <ul>
           <S.LiContainer>
-            <S.Link href="/medical/registros">
-              <i>
-                <IoCalendarNumberOutline />
-              </i>
-              <span>Consultas Médicas</span>
-            </S.Link>
+            <Link href={'/medical/registros'} legacyBehavior>
+              <S.Link>
+                <i>
+                  <IoCalendarNumberOutline />
+                </i>
+                <span>Consultas Médicas</span>
+              </S.Link>
+            </Link>
           </S.LiContainer>
         </ul>
 
@@ -49,12 +51,14 @@ function PacienteView() {
           </S.MenuTitle>
 
           <S.LiContainer>
-            <S.Link href="/medical/frequencia">
-              <i>
-                <RxCalendar />
-              </i>
-              <span>Frequência de consultas</span>
-            </S.Link>
+            <Link href={'/medical/frequencia'} legacyBehavior>
+              <S.Link>
+                <i>
+                  <RxCalendar />
+                </i>
+                <span>Frequência de consultas</span>
+              </S.Link>
+            </Link>
           </S.LiContainer>
         </ul>
 
