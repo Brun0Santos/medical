@@ -68,12 +68,14 @@ function AdminView() {
           </S.LiContainer>
 
           <S.LiContainer>
-            <S.Link href="/medical/registros">
-              <i>
-                <IoCalendarNumberOutline />
-              </i>
-              <span>Consultas Médicas</span>
-            </S.Link>
+            <Link href={'/medical/registros'} legacyBehavior>
+              <S.Link>
+                <i>
+                  <IoCalendarNumberOutline />
+                </i>
+                <span>Consultas Médicas</span>
+              </S.Link>
+            </Link>
           </S.LiContainer>
         </ul>
 
