@@ -1,15 +1,17 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaLock, FaUser } from 'react-icons/fa';
 import { TbSend } from 'react-icons/tb';
 
-// import { useLoginService } from '../../../http';
+import { LoginContext } from '../../../context/LoginContext';
 import { loginValidationSchema } from '../../../validation/login/loginValidation';
 import * as S from './styles';
 
@@ -21,8 +23,8 @@ interface Teste {
 const Inputlogin = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const { setToken } = useContext(LoginContext);
 
-  // const service = useLoginService();
   const {
     register,
     handleSubmit,
@@ -33,34 +35,40 @@ const Inputlogin = () => {
 
   const handleSubmitForm = async (data: Teste) => {
     try {
-      await toast.promise(
-        signIn('login', {
-          login: data.login,
-          password: data.password,
-          redirect: false,
-        }),
-        {
-          loading: 'Autenticando!',
-          success: () => 'Autenticação realizada com sucesso!',
-          error: 'Erro ao se autenticar!',
-        },
-      );
-
-      console.log(session?.token);
-
-      router.push('/medical/home');
+      await toast
+        .promise(
+          signIn('login', {
+            login: data.login,
+            password: data.password,
+            redirect: false,
+          }),
+          {
+            loading: 'Autenticando!',
+            success: () => 'Autenticação realizada com sucesso!',
+            error: 'Usuário ou senha inválida!',
+          },
+        )
+        .then(() => {
+          router.push('/medical/home');
+        });
     } catch (_) {
       console.error('Erro:');
     }
   };
 
   useEffect(() => {
-    if (session?.token) {
+    if (session?.token.startsWith('ey')) {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + session?.token;
-      localStorage.setItem('token', session?.token);
+      Cookies.set('token', session.token);
+      setToken({
+        login: session.login,
+        email: session.email,
+        token: session.token,
+        role: session.role,
+      });
     } else {
       delete axios.defaults.headers.common['Authorization'];
-      localStorage.removeItem('token');
+      Cookies.remove('token');
     }
   }, [session]);
 
