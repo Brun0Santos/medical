@@ -57,10 +57,12 @@ const Inputlogin = () => {
   };
 
   useEffect(() => {
-    if (session?.token.startsWith('ey')) {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + session?.token;
+    // if (session?.token.startsWith('ey')) {
+    if (session?.token) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + session.token;
       Cookies.set('token', session.token);
       setToken({
+        userId: session.userId,
         login: session.login,
         email: session.email,
         token: session.token,
