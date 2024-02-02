@@ -7,10 +7,12 @@ export const MenuContainer = styled.div`
   height: 260px;
   border-radius: 10px;
   position: fixed;
+  right: 11px;
   color: #000000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: #fff;
   padding-right: 11px;
+  margin-top: 4px;
 `;
 
 export const NavImage = styled.span`
