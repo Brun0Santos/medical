@@ -5,14 +5,16 @@ import toast from 'react-hot-toast';
 import { FcNext, FcPrevious } from 'react-icons/fc';
 import { MdOutlineSend } from 'react-icons/md';
 
-import { useDoctorService } from '../../../http';
+import { useDoctorService, useLoginService } from '../../../http';
 import { Address } from '../../../models/endereco/enderecoModel';
 import { Speciality } from '../../../models/especialidade/especialidadeModel';
+import { LoginData as Login } from '../../../models/login/loginModel';
 import { Doctor } from '../../../models/medico/medicoModel';
 import Layout from '../../layout/Layout';
 import EnviarDadosBack from '../form/steps/dados-form/EnviarDadosBack';
 import MedicoFormContato from '../form/steps/endereco-form/MedicoEndereco';
 import EspecialidadesForm from '../form/steps/especialidades/EspecialidadesForm';
+import LoginData from '../form/steps/login/LoginData';
 import MedicoFormTeste from '../form/steps/medico-form/MedicoFormTest';
 import { useHookForm } from '../hooks/UseHookForm';
 import Steps from './Steps';
@@ -67,6 +69,12 @@ function Step() {
     summary: '',
   });
 
+  const [login, setLogin] = useState<Login>({
+    login: '',
+    email: '',
+    password: '',
+  });
+
   const updateFiledHandler = (key: string, value: string) => {
     setData((prev) => {
       return { ...prev, [key]: value };
@@ -85,8 +93,15 @@ function Step() {
     });
   };
 
+  const updateFiledHandlerDataLogin = (key: string, value: string) => {
+    setLogin((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
   const formsComponents = [
     <MedicoFormTeste datas={data} updateFiledHandler={updateFiledHandler} key={0} />,
+    <LoginData data={login} updateFiledHandler={updateFiledHandlerDataLogin} key={5} />,
     <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} key={1} />,
     <EspecialidadesForm
       speciality={data}
@@ -100,6 +115,7 @@ function Step() {
     useHookForm(formsComponents);
 
   const doctorService = useDoctorService();
+  const dataLoginService = useLoginService();
 
   const teste = () => {
     const pessoa: Doctor = {
@@ -129,16 +145,28 @@ function Step() {
       ],
     };
 
+    const dadosLogin: Login = {
+      email: data.email ? data.email : '',
+      login: login.login,
+      password: login.password,
+      cpf: data.cpf,
+    };
+
     try {
       doctorService.salvarMedico(pessoa).then(() => {
         toast.success('Médico cadastrado com sucesso!');
-        router.push(`/medical/medicos`);
+        dataLoginService
+          .createLogin(dadosLogin)
+          .then(() => {
+            router.push(`/medical/medicos`);
+          })
+          .catch(() => toast.error('Um erro inesperado aconteceu'));
       });
     } catch (_) {
       toast.error('Erro ao salvar doutor');
     }
-
     console.log(pessoa);
+    console.log(dadosLogin);
   };
 
   return (
