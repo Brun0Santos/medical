@@ -1,8 +1,9 @@
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { LoginContext } from '../../../context/LoginContext';
 import { useRegisterService, useSpecialityService } from '../../../http';
 import { Speciality } from '../../../models/especialidade/especialidadeModel';
 import { DoctorBySpeciality } from '../../../models/medico/medicoModel';
@@ -26,6 +27,7 @@ function RegistroForm() {
   const [specialityId, setSpecialityId] = useState<string>('');
   const [doctorId, setDoctorId] = useState<string>('');
   const [, setTypeMedicalAppointment] = useState<string>('');
+  const { token } = useContext(LoginContext);
 
   useEffect(() => {
     try {
@@ -74,7 +76,7 @@ function RegistroForm() {
       description,
       specialityId,
       doctorId,
-      patientId: '1',
+      patientId: String(token?.userId),
       serviceDateTime: '2024-01-23T10:30:00',
       typeMedicalAppointment: 'CONSULTA',
     };
