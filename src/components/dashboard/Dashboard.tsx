@@ -1,10 +1,11 @@
 // import Image from 'next/image';
-import React from 'react';
+import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { CiPhone } from 'react-icons/ci';
 import { FcCalendar } from 'react-icons/fc';
 import { GoDeviceCameraVideo } from 'react-icons/go';
 
+import { LoginContext } from '../../context/LoginContext';
 // import logo from '../../../public/calendar.png';
 import Layout from '../layout/Layout';
 // import DadosAntedimento from './chart/atendimento/DadosAtendimento';
@@ -15,9 +16,16 @@ import Layout from '../layout/Layout';
 import * as S from './styles';
 
 function Dashboard() {
+  const { token } = useContext(LoginContext);
+
   return (
     <Layout title="Painel Administrativo">
-      <S.Title>👋Bem vindo, Bruno</S.Title>
+      <S.Title>
+        👋Bem vindo,{' '}
+        {token?.login !== undefined
+          ? token?.login.charAt(0).toUpperCase() + token.login.slice(1)
+          : ''}
+      </S.Title>
       <S.ContainerEstatisticas>
         <S.ContainerVendas>
           <S.NavImage>
