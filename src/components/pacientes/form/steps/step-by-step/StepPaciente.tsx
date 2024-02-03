@@ -6,13 +6,15 @@ import toast from 'react-hot-toast';
 import { FcNext, FcPrevious } from 'react-icons/fc';
 import { MdOutlineSend } from 'react-icons/md';
 
-import { usePatienteService } from '../../../../../http';
+import { useLoginService, usePatienteService } from '../../../../../http';
 import { Address } from '../../../../../models/endereco/enderecoModel';
+import { LoginData as Login } from '../../../../../models/login/loginModel';
 import { Patient } from '../../../../../models/paciente/pacienteModel';
 import Layout from '../../../../layout/Layout';
 import DiasTrabalhoForm from '../../../../medicos/form/steps/dados-form/EnviarDadosBack';
 import MedicoFormContato from '../../../../medicos/form/steps/endereco-form/MedicoEndereco';
 import { useHookForm } from '../../../../medicos/hooks/UseHookForm';
+import LoginData from '../../login/LoginData';
 import PacienteForm from '../../paciente-form/PacienteForm';
 import Steps from './Steps';
 import * as S from './styles';
@@ -20,6 +22,13 @@ import * as S from './styles';
 function StepPaciente() {
   const router = useRouter();
   const service = usePatienteService();
+  const loginServicePatient = useLoginService();
+  const [login, setLogin] = useState<Login>({
+    login: '',
+    email: '',
+    password: '',
+  });
+
   const [data, setData] = useState<Patient>({
     id: '',
     name: '',
@@ -62,8 +71,15 @@ function StepPaciente() {
     });
   };
 
+  const updateFiledHandlerDataLogin = (key: string, value: string) => {
+    setLogin((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
   const formsComponents = [
     <PacienteForm data={data} updateFiledHandler={updateFiledHandler} key={0} />,
+    <LoginData data={login} updateFiledHandler={updateFiledHandlerDataLogin} key={6} />,
     <MedicoFormContato datas={address} updateFiledHandler={updateFiledHandlerAddress} key={1} />,
     <DiasTrabalhoForm key={3} />,
   ];
@@ -90,12 +106,26 @@ function StepPaciente() {
         zipCode: address.zipCode,
       },
     };
+
+    const dadosLogin: Login = {
+      email: data.email ? data.email : '',
+      login: login.login,
+      password: login.password,
+      cpf: data.cpf,
+    };
+
     try {
       service
         .savePatient(paciente)
         .then(() => {
           toast.success('Paciente cadastrado!');
           router.push('/medical/pacientes');
+          loginServicePatient
+            .createLoginPatient(dadosLogin)
+            .then(() => {
+              toast.success('Sucesso!');
+            })
+            .catch(() => {});
         })
         .catch(() => toast.error('Erro ao cadastrar o paciente'));
     } catch (error) {
