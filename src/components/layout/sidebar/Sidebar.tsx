@@ -34,7 +34,9 @@ function Sidebar() {
           </S.AccountImg>
           <S.DataText>
             <span className="name">{token?.login}</span>
-            <span className="email">Administrador</span>
+            {token?.role == 'ADMIN' && <span className="email">Administrador</span>}
+            {token?.role == 'PATIENT' && <span className="email">Paciente</span>}
+            {token?.role == 'DOCTOR' && <span className="email">Médico</span>}
           </S.DataText>
         </S.AccountContainer>
       </S.SidebarMenu>
