@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaUserDoctor } from 'react-icons/fa6';
 import { FaUsers } from 'react-icons/fa6';
 import { FiGitBranch } from 'react-icons/fi';
 import { IoCalendarNumberOutline, IoSettingsOutline } from 'react-icons/io5';
@@ -44,17 +43,6 @@ function MedicoView() {
         </ul>
 
         <ul>
-          <S.LiContainer>
-            <Link href={'/medical/medicos'} legacyBehavior>
-              <S.Link>
-                <i>
-                  <FaUserDoctor />
-                </i>
-                <span>Médicos</span>
-              </S.Link>
-            </Link>
-          </S.LiContainer>
-
           <S.LiContainer>
             <Link href={'/medical/pacientes'} legacyBehavior>
               <S.Link>
