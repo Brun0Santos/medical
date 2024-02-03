@@ -22,9 +22,12 @@ function Registros() {
 
   useEffect(() => {
     try {
-      registroService.getALlRegister().then((data) => {
-        setRegistro(data);
-      });
+      registroService
+        .getALlRegister()
+        .then((data) => {
+          setRegistro(data);
+        })
+        .catch(() => toast.error('Nenhuma consulta cadastrada!'));
     } catch (error) {
       toast.error('Algum erro inesperado aconteceu!');
     }
