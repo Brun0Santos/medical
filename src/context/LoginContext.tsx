@@ -5,6 +5,7 @@ interface TokenProviderProps {
 }
 
 interface TokenProps {
+  userId: string;
   login: string;
   email: string;
   token: string;
@@ -13,12 +14,12 @@ interface TokenProps {
 
 interface ContextToken {
   token: TokenProps | null;
-  setToken: (token: TokenProps | null) => void;
+  setToken: (token: TokenProps) => void;
 }
 
 export const LoginContext = createContext<ContextToken>({
   setToken: () => {},
-  token: { email: '', login: '', role: '', token: '' },
+  token: { userId: '', email: '', login: '', role: '', token: '' },
 });
 
 export function TokenProvider({ children }: TokenProviderProps) {
