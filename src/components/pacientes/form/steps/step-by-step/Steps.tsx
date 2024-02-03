@@ -16,10 +16,15 @@ function Steps({ currentStep }: any) {
 
       <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
         <FaRegAddressCard />
-        <p>Endereço</p>
+        <p>Login</p>
       </div>
 
       <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+        <FaRegAddressCard />
+        <p>Endereço</p>
+      </div>
+
+      <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
         <CiLocationArrow1 />
         <p>Enviar</p>
       </div>
