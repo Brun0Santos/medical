@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { DoctorBySpeciality } from '../../models/medico/medicoModel';
-import { Registro } from '../../models/registro/registroModel';
+import { Registro, RegistroFromId } from '../../models/registro/registroModel';
 import { httpCliente } from '../routes/routes';
 
 const resourceUrl: string = '/api/v1/appointment';
@@ -22,6 +22,23 @@ export const useRegisterService = () => {
     return response.data;
   };
 
+  const getALlRegisterFromId = async (id: string): Promise<Array<RegistroFromId>> => {
+    const url: string = `/api/v1/appointments/${id}`;
+    const response: AxiosResponse<Array<RegistroFromId>> =
+      await httpCliente.get<Array<RegistroFromId>>(url);
+    return response.data;
+  };
+
+  const updatelRegisterFromId = async (id: string) => {
+    const url: string = `/api/v1/appointmentFromId/${id}`;
+    await httpCliente.post<string>(url);
+  };
+
+  const rejectAppointmentRegisterFromId = async (id: string) => {
+    const url: string = `/api/v1/reproveAppointmentFromId/${id}`;
+    await httpCliente.post<string>(url);
+  };
+
   const saveRegister = async (registro: Registro): Promise<Registro> => {
     const response: AxiosResponse<Registro> = await httpCliente.post<Registro>(
       resourceUrl,
@@ -33,6 +50,9 @@ export const useRegisterService = () => {
   return {
     getAllDoctorsBySpeciality,
     getALlRegister,
+    getALlRegisterFromId,
+    rejectAppointmentRegisterFromId,
     saveRegister,
+    updatelRegisterFromId,
   };
 };
