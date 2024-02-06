@@ -11,13 +11,17 @@ import { LoginContext } from '../../context/LoginContext';
 import { useRegisterService } from '../../http';
 import { RegistroFromDoutor } from '../../models/registro/registroModel';
 import Layout from '../layout/Layout';
+import Modal from './ConsultaModal';
+import InfoModalCalendar from './InfoModal';
 import * as S from './styles';
 
 function CalendarioComConsultas() {
   const localizer = momentLocalizer(moment);
   const { token } = useContext(LoginContext);
   const [registrosPorDoutor, setRegistroPorDoutor] = useState<Array<RegistroFromDoutor>>();
+  const [registroFromDoutor, setRegistroFromDoutor] = useState<RegistroFromDoutor>();
   const service = useRegisterService();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const result = () => {
     if (registrosPorDoutor) {
@@ -25,6 +29,7 @@ function CalendarioComConsultas() {
         title: consulta.description,
         start: new Date(consulta.serviceDateTime),
         end: new Date(consulta.serviceDateTime),
+        data: consulta,
       }));
 
       return eventosConsultas;
@@ -41,8 +46,14 @@ function CalendarioComConsultas() {
     }
   }, []);
 
-  const abrirModalConsulta = (data: string) => {
-    console.log(data);
+  const abrirModalConsulta = (data: RegistroFromDoutor) => {
+    setRegistroFromDoutor(data.data);
+
+    setShowModal(true);
+  };
+
+  const onClose = () => {
+    setShowModal(false);
   };
 
   return (
@@ -54,13 +65,17 @@ function CalendarioComConsultas() {
         </Button>
       </S.NavContainer>
 
-      <div>
+      <S.CalendarContainer>
         <Calendar
           localizer={localizer}
           events={eventosConsultas}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{
+            height: 500,
+            opacity: 0.8,
+            color: 'black',
+          }}
           messages={{
             next: 'Próximo',
             previous: 'Anterior',
@@ -78,9 +93,14 @@ function CalendarioComConsultas() {
             dayFormat: 'ddd D',
             monthHeaderFormat: 'MMMM YYYY',
           }}
-          onSelectEvent={(event) => abrirModalConsulta(event as string)}
+          onSelectEvent={(event) => abrirModalConsulta(event as RegistroFromDoutor)}
         />
-      </div>
+      </S.CalendarContainer>
+      {showModal && (
+        <Modal onClose={onClose}>
+          <InfoModalCalendar closeModal={onClose} registro={registroFromDoutor} />
+        </Modal>
+      )}
     </Layout>
   );
 }
