@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import moment from 'moment';
 import Link from 'next/link';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -26,7 +27,7 @@ function RegistroForm() {
   const [serviceDateTime, SetServiceDateTime] = useState<string>('');
   const [specialityId, setSpecialityId] = useState<string>('');
   const [doctorId, setDoctorId] = useState<string>('');
-  const [, setTypeMedicalAppointment] = useState<string>('');
+  const [typeMedicalAppointment, setTypeMedicalAppointment] = useState<string>('');
   const { token } = useContext(LoginContext);
 
   useEffect(() => {
@@ -72,13 +73,14 @@ function RegistroForm() {
   };
 
   const registrar = () => {
+    const horaAtual = moment().format('HH:mm:ss.SSS');
     const appointment: Registro = {
       description,
       specialityId,
       doctorId,
       patientId: String(token?.userId),
-      serviceDateTime: '2024-01-23T10:30:00',
-      typeMedicalAppointment: 'CONSULTA',
+      serviceDateTime: serviceDateTime + 'T' + horaAtual,
+      typeMedicalAppointment: typeMedicalAppointment,
     };
     registerService.saveRegister(appointment).then(() => {
       toast.success('Registro realizado com sucesso!');
