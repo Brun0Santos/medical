@@ -105,10 +105,10 @@ function Registros() {
   };
 
   return (
-    <Layout title="Pacientes">
+    <Layout title="Painel Administrativo">
       <S.Container>
         <S.NavContainer>
-          <h3>Atividades</h3>
+          <h3>Atividades Médicas</h3>
 
           <div>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
