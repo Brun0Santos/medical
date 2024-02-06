@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import moment from 'moment';
+import React, { useContext, useEffect, useState } from 'react';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
@@ -7,13 +8,14 @@ import { TbFileDescription } from 'react-icons/tb';
 import { TiTag } from 'react-icons/ti';
 
 import { LoginContext } from '../../../context/LoginContext';
+import { Patient } from '../../../models/paciente/pacienteModel';
 import { Registro } from '../../../models/registro/registroModel';
 import * as S from './styles';
 
 interface ModalProps {
   closeModal: () => void;
-  confirmAppointment?: () => void;
-  rejectAppointment?: () => void;
+  confirmAppointment: (patient: Patient) => void;
+  rejectAppointment: (patient: Patient) => void;
   categoria?: string;
   descricao?: string;
   data?: string;
@@ -34,6 +36,13 @@ const registroCores: RegistrosCores = {
 
 function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment }: ModalProps) {
   const { token } = useContext(LoginContext);
+  const [date, setDate] = useState<string>('');
+
+  useEffect(() => {
+    if (registro?.serviceDateTime) {
+      setDate(moment(registro?.serviceDateTime).format('DD/MM/YYYY HH:mm'));
+    }
+  }, []);
 
   return (
     <div>
@@ -70,7 +79,7 @@ function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment
             Data
             <IoCalendarNumberOutline />
           </label>
-          <span>{registro?.serviceDateTime}</span>
+          <span>{date}</span>
         </S.ContentModal>
 
         <S.ContentModal>
@@ -92,9 +101,11 @@ function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment
           {registro?.appointmentStatus == 'AGUARDANDO' && (
             <S.ContentButtonModal>
               {token?.role !== 'PATIENT' && (
-                <S.ButtonConfirmar onClick={confirmAppointment}>Confirmar</S.ButtonConfirmar>
+                <S.ButtonConfirmar onClick={() => confirmAppointment(registro)}>
+                  Confirmar
+                </S.ButtonConfirmar>
               )}
-              <S.ButtonRejeitar onClick={rejectAppointment}>
+              <S.ButtonRejeitar onClick={() => rejectAppointment(registro)}>
                 {token?.role == 'PATIENT' ? 'Cancelar' : 'Rejeitar'}
               </S.ButtonRejeitar>
             </S.ContentButtonModal>
