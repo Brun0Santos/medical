@@ -1,6 +1,8 @@
 'use client';
 
 import { Avatar, TableCell, TableRow } from '@mui/material';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { GrStatusInfo } from 'react-icons/gr';
 import { MdModeEdit } from 'react-icons/md';
 
@@ -25,7 +27,15 @@ const registroCores: RegistrosCores = {
   REJEITADO: '#ffa052',
 };
 
+const registroCoresCategoria: RegistrosCores = {
+  CONSULTA: '#ff4188',
+  EXAME: '#00b8e7',
+  OPERACAO: '#5733FF',
+  OUTROS: '#ffa052',
+};
+
 const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
+  const [date, setDate] = useState<string>('');
   // const [isVisibleInfo, setIsVisibleInfo] = useState<boolean>(false);
 
   // const t = () => {
@@ -36,17 +46,39 @@ const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
   //   setIsVisibleInfo(false);
   // };
 
+  useEffect(() => {
+    if (registro.serviceDateTime) {
+      setDate(moment(registro.serviceDateTime).format('DD/MM/YYYY HH:mm'));
+    }
+  }, []);
+
   return (
     <TableRow key={registro.id} className="slow">
       <TableCell align="left">
         <Avatar alt="luciano" src={`https://randomuser.me/api/portraits/men/${registro.id}.jpg`} />
       </TableCell>
 
-      <TableCell align="center">{registro.description}</TableCell>
-      <TableCell align="center">{registro.serviceDateTime}</TableCell>
       <TableCell align="center">
-        <S.InfoContainer>{registro.typeMedicalAppointment}</S.InfoContainer>
+        <S.Shadow>{registro.description}</S.Shadow>
       </TableCell>
+
+      <TableCell align="center">
+        <S.Shadow>{date}</S.Shadow>
+      </TableCell>
+
+      <TableCell align="center">
+        <S.InfoContainer
+          style={{
+            color:
+              registro.typeMedicalAppointment !== undefined
+                ? `${registroCoresCategoria[registro.typeMedicalAppointment]}`
+                : '#f3f3f3',
+          }}
+        >
+          {registro.typeMedicalAppointment}
+        </S.InfoContainer>
+      </TableCell>
+
       <TableCell align="center">
         <S.StatusContainer
           style={{
