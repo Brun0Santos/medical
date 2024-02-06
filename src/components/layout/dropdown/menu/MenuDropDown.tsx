@@ -31,14 +31,17 @@ function MenuDropDown() {
             <S.LiTitle>Perfil</S.LiTitle>
           </S.LiInfo>
         </Link>
-        <S.LiInfo>
-          <S.NavImage>
-            <i>
-              <IoCalendarNumberOutline style={{ fontSize: '17px' }} />
-            </i>
-          </S.NavImage>
-          <S.LiTitle>Calendário</S.LiTitle>
-        </S.LiInfo>
+
+        <Link href={'/medical/frequencia'} legacyBehavior>
+          <S.LiInfo>
+            <S.NavImage>
+              <i>
+                <IoCalendarNumberOutline style={{ fontSize: '17px' }} />
+              </i>
+            </S.NavImage>
+            <S.LiTitle>Calendário</S.LiTitle>
+          </S.LiInfo>
+        </Link>
 
         <S.LiInfo>
           <S.NavImage>
