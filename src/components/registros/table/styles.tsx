@@ -42,15 +42,26 @@ export const ButtonInfo = styled.div`
 `;
 
 export const InfoContainer = styled.span`
+  font-weight: bold;
   color: #fff;
-  background-color: #4764e9;
+  background-color: #e9e9e9;
   border-radius: 7px;
   padding: 3px;
+  box-shadow: 0 0 10px rgba(1, 1, 0, 0.1);
 `;
 
 export const StatusContainer = styled.span`
+  font-weight: bold;
   border-radius: 7px;
   padding: 3px;
   background: #e9e9e9;
+  box-shadow: 0 0 10px rgba(1, 1, 0, 0.1);
+`;
+
+export const Shadow = styled.span`
+  font-weight: 500;
+  border-radius: 7px;
+  padding: 3px;
+  background: #eeeeee;
   box-shadow: 0 0 10px rgba(1, 1, 0, 0.1);
 `;
