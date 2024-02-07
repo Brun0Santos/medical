@@ -14,14 +14,16 @@ function Pesquisas() {
   ];
 
   return (
-    <LineChart width={670} height={250} data={data} margin={{ top: 20, right: 20 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="Pesquisas" stroke="#e20447" />
-    </LineChart>
+    <div>
+      <LineChart width={670} height={250} data={data} margin={{ top: 20, right: 20 }} id="1">
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="Pesquisas" stroke="#e20447" />
+      </LineChart>
+    </div>
   );
 }
 
