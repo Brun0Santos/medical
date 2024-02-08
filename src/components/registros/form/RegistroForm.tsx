@@ -30,6 +30,8 @@ function RegistroForm() {
   const [typeMedicalAppointment, setTypeMedicalAppointment] = useState<string>('');
   const { token } = useContext(LoginContext);
 
+  const [selectedFileName, setSelectedFileName] = useState<File | null>();
+
   useEffect(() => {
     try {
       specialityService
@@ -82,9 +84,14 @@ function RegistroForm() {
       serviceDateTime: serviceDateTime + 'T' + horaAtual,
       typeMedicalAppointment: typeMedicalAppointment,
     };
-    registerService.saveRegister(appointment).then(() => {
-      toast.success('Registro realizado com sucesso!');
-    });
+
+    registerService
+      .saveRegister(appointment)
+      .then(() => {
+        toast.success('Registro realizado com sucesso!');
+        saveFile();
+      })
+      .catch(() => toast.error('Error'));
   };
 
   const options = [
@@ -94,6 +101,25 @@ function RegistroForm() {
     { value: 'OPERACAO', label: 'Operação' },
     { value: 'OUTROS', label: 'Outros' },
   ];
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFileName(event.target.files[0]);
+    }
+  };
+
+  const saveFile = () => {
+    try {
+      if (selectedFileName) {
+        const formData = new FormData();
+        formData.append('id', String(token?.userId));
+        formData.append('file', selectedFileName);
+        registerService.saveFile(formData).then(() => console.log('sucesso'));
+      }
+    } catch (_) {
+      toast.error('Um erro inesperado aconteceu');
+    }
+  };
 
   return (
     <Layout title="Painel Administrativo">
@@ -168,6 +194,41 @@ function RegistroForm() {
               // value={String(data?.medicalInsurance)}
               onChange={(e) => setTypeMedicalAppointment(e.target.value)}
             />
+          </S.SelectContainer>
+
+          <S.SelectContainer>
+            <div
+              style={{
+                width: '100%',
+                border: '1px solid #ccc',
+                height: '43px',
+              }}
+            >
+              <input
+                type="file"
+                id="fileInput"
+                onChange={handleFileChange}
+                style={{ display: 'none', textAlign: 'center', alignItems: 'center' }}
+                multiple
+              />
+              <label
+                htmlFor="fileInput"
+                style={{
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                }}
+              >
+                Selecionar Laudo
+              </label>
+              <span
+                style={{
+                  paddingLeft: '7px',
+                  fontSize: '13px',
+
+                  margin: '1px solid #fefefe',
+                }}
+              ></span>
+            </div>
           </S.SelectContainer>
 
           <Button
