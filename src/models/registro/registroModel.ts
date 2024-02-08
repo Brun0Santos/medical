@@ -8,7 +8,6 @@ export interface Registro {
   serviceDateTime?: string;
   appointmentStatus?: string;
   typeMedicalAppointment?: string;
-  file?: Array<File>;
 }
 
 export interface RegistroFromId {
