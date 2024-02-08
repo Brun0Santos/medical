@@ -1,7 +1,8 @@
-import Layout from '../../components/layout/Layout';
+import Dashboard from '../../components/dashboard/Dashboard';
+// import Layout from '../../components/layout/Layout';
 
 function Homes() {
-  return <Layout title="Home"></Layout>;
+  return <Dashboard></Dashboard>;
 }
 
 export default Homes;
