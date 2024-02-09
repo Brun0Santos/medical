@@ -85,13 +85,21 @@ function RegistroForm() {
       typeMedicalAppointment: typeMedicalAppointment,
     };
 
-    registerService
-      .saveRegister(appointment)
-      .then(() => {
-        toast.success('Registro realizado com sucesso!');
-        saveFile();
-      })
-      .catch(() => toast.error('Error'));
+    if (selectedFileName) {
+      const formData = new FormData();
+      const json = JSON.stringify(appointment);
+      const blob = new Blob([json], {
+        type: 'application/json',
+      });
+
+      formData.append('appointmentDto', blob);
+      formData.append('file', selectedFileName);
+      console.log(appointment);
+      registerService
+        .saveRegister(formData)
+        .then(() => console.log('sucesso'))
+        .catch(() => {});
+    }
   };
 
   const options = [
@@ -105,19 +113,6 @@ function RegistroForm() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedFileName(event.target.files[0]);
-    }
-  };
-
-  const saveFile = () => {
-    try {
-      if (selectedFileName) {
-        const formData = new FormData();
-        formData.append('id', String(token?.userId));
-        formData.append('file', selectedFileName);
-        registerService.saveFile(formData).then(() => console.log('sucesso'));
-      }
-    } catch (_) {
-      toast.error('Um erro inesperado aconteceu');
     }
   };
 
@@ -163,7 +158,7 @@ function RegistroForm() {
             />
           </S.SelectContainer>
 
-          <S.CentroContainer>
+          <S.CentroContainer encType="multipart/form-data">
             <S.InputBox>
               <S.LabelInput htmlFor="cpf">Data</S.LabelInput>
               <input
