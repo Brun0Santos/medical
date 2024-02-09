@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { DoctorBySpeciality } from '../../models/medico/medicoModel';
-import { Registro, RegistroFromId } from '../../models/registro/registroModel';
+import { Registro, RegistroFromDoutor, RegistroFromId } from '../../models/registro/registroModel';
 import { httpCliente } from '../routes/routes';
 
 const resourceUrl: string = '/api/v1/appointment';
@@ -39,12 +39,37 @@ export const useRegisterService = () => {
     await httpCliente.post<string>(url);
   };
 
-  const saveRegister = async (registro: Registro): Promise<Registro> => {
-    const response: AxiosResponse<Registro> = await httpCliente.post<Registro>(
-      resourceUrl,
-      registro,
-    );
+  const saveFile = async (file: FormData) => {
+    const url: string = `http://localhost:8080/api/v1/file/patient`;
+    httpCliente.post(url, file, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  };
+
+  const getALlRegisterFromDoctor = async (id: string): Promise<Array<RegistroFromDoutor>> => {
+    const url: string = `/api/v1/appointmentFromDoctor/${id}`;
+    const response: AxiosResponse<Array<RegistroFromDoutor>> =
+      await httpCliente.get<Array<RegistroFromDoutor>>(url);
     return response.data;
+  };
+
+  // const saveRegister = async (registro: Registro): Promise<Registro> => {
+  //   const response: AxiosResponse<Registro> = await httpCliente.post<Registro>(
+  //     resourceUrl,
+  //     registro,
+  //   );
+  //   return response.data;
+  // };
+
+  const saveRegister = async (formData: FormData): Promise<void> => {
+    const url: string = `http://localhost:8080/api/v1/appointment`;
+    await axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   };
 
   return {
@@ -53,6 +78,8 @@ export const useRegisterService = () => {
     getALlRegisterFromId,
     rejectAppointmentRegisterFromId,
     saveRegister,
+    getALlRegisterFromDoctor,
     updatelRegisterFromId,
+    saveFile,
   };
 };
