@@ -39,7 +39,11 @@ function Navbar({ title, children }: Title) {
           </S.NavImage>
 
           <S.NameText onClick={() => setOpenMenu(!openMenu)}>
-            <h4>{token?.login}</h4>
+            <h4>
+              {token?.login !== undefined
+                ? token.login.charAt(0).toUpperCase() + token.login.slice(1)
+                : ''}
+            </h4>
             <div style={{ fontSize: '12px' }}>
               {token?.role == 'ADMIN' && <span className="email">Administrador</span>}
               {token?.role == 'PATIENT' && <span className="email">Paciente</span>}
