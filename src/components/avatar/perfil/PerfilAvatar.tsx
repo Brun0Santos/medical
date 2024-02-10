@@ -1,59 +1,59 @@
 import { Avatar, Button } from '@mui/material';
-import axios from 'axios';
+// import axios from 'axios';
 import Link from 'next/link';
-import React, { ChangeEvent, useState } from 'react';
+// import React, { ChangeEvent, useState } from 'react';
 import { GoVerified } from 'react-icons/go';
 
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
 function PerfilAvatar() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [preview, setPreview] = useState<string | null>(null);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      setSelectedFile(file);
+  // const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files && event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     setSelectedFile(file);
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreview(reader.result as string);
+  //     };
 
-      reader.readAsDataURL(file);
+  //     reader.readAsDataURL(file);
 
-      // Limpar o valor do input para permitir a seleção do mesmo arquivo novamente
-      event.target.value = '';
-    }
-  };
+  //     // Limpar o valor do input para permitir a seleção do mesmo arquivo novamente
+  //     event.target.value = '';
+  //   }
+  // };
 
-  const handleRemoveFile = () => {
-    setSelectedFile(null);
-    setPreview(null);
-  };
+  // const handleRemoveFile = () => {
+  //   setSelectedFile(null);
+  //   setPreview(null);
+  // };
 
-  const handleFileUpload = async () => {
-    if (!selectedFile) {
-      console.error('Nenhum arquivo selecionado.');
-      return;
-    }
+  // const handleFileUpload = async () => {
+  //   if (!selectedFile) {
+  //     console.error('Nenhum arquivo selecionado.');
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    formData.append('file', selectedFile);
+  //   const formData = new FormData();
+  //   formData.append('file', selectedFile);
 
-    try {
-      await axios.post('http://seu-backend.com/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+  //   try {
+  //     await axios.post('http://seu-backend.com/upload', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
 
-      console.log('Upload bem-sucedido!');
-    } catch (error) {
-      console.error('Erro no upload:', error);
-    }
-  };
+  //     console.log('Upload bem-sucedido!');
+  //   } catch (error) {
+  //     console.error('Erro no upload:', error);
+  //   }
+  // };
 
   return (
     <Layout title="Painel Administrativo">
