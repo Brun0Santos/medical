@@ -59,7 +59,7 @@ function PerfilAvatar() {
     <Layout title="Painel Administrativo">
       <S.Container>
         <S.NavContainer>
-          <h3>Perfil</h3>
+          <h2>Perfil</h2>
           <Link href={'/medical/pacientes/novo-paciente'}>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
               Voltar
