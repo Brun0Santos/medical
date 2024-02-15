@@ -47,6 +47,7 @@ function CalendarioComConsultas() {
   }, []);
 
   const abrirModalConsulta = (data: RegistroFromDoutor) => {
+    console.log(data);
     setRegistroFromDoutor(data.data);
 
     setShowModal(true);

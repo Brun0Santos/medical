@@ -1,11 +1,13 @@
 'use client';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoNotificationsSharp } from 'react-icons/io5';
 
 import Logo from '../../../../public/d.jpg';
 import { LoginContext } from '../../../context/LoginContext';
+import { useFileService } from '../../../http';
+import { AvatarDoctor } from '../../../models/avatar/avatarModel';
 import MenuDropDown from '../dropdown/menu/MenuDropDown';
 import NotificacaoDropDown from '../dropdown/notificacao/NotificacaoDropDown';
 import * as S from './styles';
@@ -19,6 +21,16 @@ function Navbar({ title, children }: Title) {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const { token } = useContext(LoginContext);
+  const service = useFileService();
+  const [registrosPorDoutor, setRegistroPorDoutor] = useState<AvatarDoctor>();
+
+  useEffect(() => {
+    if (token?.userId) {
+      service.avatarFromDoutor(token.userId).then((data) => {
+        setRegistroPorDoutor(data);
+      });
+    }
+  }, [token]);
 
   return (
     <S.ContentContainer>
@@ -35,7 +47,12 @@ function Navbar({ title, children }: Title) {
           </div>
 
           <S.NavImage>
-            <Image src={Logo} alt="Minha Imagem" width={300} height={300} />
+            <Image
+              src={'data:image;base64, ' + registrosPorDoutor?.file}
+              alt="Minha Imagem"
+              width={300}
+              height={300}
+            />
           </S.NavImage>
 
           <S.NameText onClick={() => setOpenMenu(!openMenu)}>
