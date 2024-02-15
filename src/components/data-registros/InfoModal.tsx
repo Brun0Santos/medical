@@ -8,6 +8,7 @@ import { TbFileDescription } from 'react-icons/tb';
 import { TiTag } from 'react-icons/ti';
 
 import { RegistroFromDoutor } from '../../models/registro/registroModel';
+import FileAppointment from './file/FileAppointment';
 import * as S from './styles';
 
 interface ModalProps {
@@ -53,7 +54,7 @@ function InfoModalCalendar({ closeModal, registro }: ModalProps) {
 
       <S.InfoModal>
         <S.ContentModal>
-          <label htmlFor="">
+          <label>
             Paciente
             <FaRegUserCircle />
           </label>
@@ -118,6 +119,16 @@ function InfoModalCalendar({ closeModal, registro }: ModalProps) {
             {registro?.appointmentStatus}
           </div>
         </S.ContentModal>
+
+        <S.ContentModal>
+          <label htmlFor="">
+            Laudo Médico
+            <IoCalendarNumberOutline />
+          </label>
+        </S.ContentModal>
+        <div>
+          <FileAppointment registro={registro} />
+        </div>
       </S.InfoModal>
     </div>
   );
