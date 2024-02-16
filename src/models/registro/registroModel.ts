@@ -29,4 +29,5 @@ export interface RegistroFromDoutor {
   appointmentStatus: string;
   namePatient: string;
   data?: any;
+  file: string;
 }
