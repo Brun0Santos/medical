@@ -1,9 +1,12 @@
 import { Avatar, Button } from '@mui/material';
 // import axios from 'axios';
 import Link from 'next/link';
+import { ChangeEvent, useContext, useState } from 'react';
 // import React, { ChangeEvent, useState } from 'react';
 import { GoVerified } from 'react-icons/go';
 
+import { LoginContext } from '../../../context/LoginContext';
+import { useFileService } from '../../../http';
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
@@ -54,6 +57,28 @@ function PerfilAvatar() {
   //     console.error('Erro no upload:', error);
   //   }
   // };
+  const { token } = useContext(LoginContext);
+
+  const [, setSelectedFileName] = useState<File | null>();
+
+  const service = useFileService();
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFileName(event.target.files[0]);
+      const file = event.target.files[0];
+
+      const formData = new FormData();
+
+      formData.append('id', String(token?.userId));
+      formData.append('avatar', file);
+
+      service
+        .saveRegister(formData)
+        .then(() => console.log('sucesso'))
+        .catch(() => {});
+    }
+  };
 
   return (
     <Layout title="Painel Administrativo">
@@ -73,8 +98,34 @@ function PerfilAvatar() {
             <p>Este é o seu avatar, clique nele para modificá-lo.</p>
           </div>
 
-          <div>
-            <Avatar alt="luciano" src={`https://randomuser.me/api/portraits/men/2.jpg`} />
+          <div style={{ display: 'flex' }}>
+            <label htmlFor="fileInput">
+              <Avatar
+                className="fileInput"
+                alt="luciano"
+                src={`https://randomuser.me/api/portraits/men/2.jpg`}
+                style={{
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                }}
+              />
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+              multiple
+            />
+
+            <span
+              style={{
+                paddingLeft: '7px',
+                fontSize: '13px',
+
+                margin: '1px solid #fefefe',
+              }}
+            ></span>
           </div>
         </S.AvatarContainer>
         <S.DivTeste>Um avatar é opcional, mas fortemente recomendado.</S.DivTeste>
