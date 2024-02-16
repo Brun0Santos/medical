@@ -126,5 +126,4 @@ export const InfoContainer = styled.div`
   background: #4764e9;
   border-radius: 7px;
   padding: 3px 5px;
-  width: 14rem;
 `;
