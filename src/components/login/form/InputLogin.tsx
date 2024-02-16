@@ -60,6 +60,7 @@ const Inputlogin = () => {
     // if (session?.token.startsWith('ey')) {
     if (session?.token) {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + session.token;
+      localStorage.setItem('token', session.token);
       Cookies.set('token', session.token);
       setToken({
         userId: session.userId,
