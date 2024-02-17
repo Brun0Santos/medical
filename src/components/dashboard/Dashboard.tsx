@@ -1,5 +1,6 @@
 // import Image from 'next/image';
-import React, { useContext } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { CiPhone } from 'react-icons/ci';
 import { FcCalendar } from 'react-icons/fc';
@@ -17,6 +18,13 @@ import * as S from './styles';
 
 function Dashboard() {
   const { token } = useContext(LoginContext);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + storedToken;
+    }
+  }, []);
 
   return (
     <Layout title="Painel Administrativo">
