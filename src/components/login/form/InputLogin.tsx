@@ -3,15 +3,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { signIn, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { FaLock, FaUser } from 'react-icons/fa';
 import { TbSend } from 'react-icons/tb';
 
 import { LoginContext } from '../../../context/LoginContext';
+import { httpCliente } from '../../../http/routes/routes';
 import { loginValidationSchema } from '../../../validation/login/loginValidation';
 import * as S from './styles';
 
@@ -22,7 +20,7 @@ interface Teste {
 
 const Inputlogin = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const { setToken } = useContext(LoginContext);
 
   const {
@@ -33,47 +31,80 @@ const Inputlogin = () => {
     resolver: yupResolver(loginValidationSchema),
   });
 
+  // const handleSubmitForm = async (data: Teste) => {
+  //   try {
+  //     await toast
+  //       .promise(
+  //         signIn('login', {
+  //           login: data.login,
+  //           password: data.password,
+  //           redirect: false,
+  //         }),
+  //         {
+  //           loading: 'Autenticando!',
+  //           success: () => 'Autenticação realizada com sucesso!',
+  //           error: 'Usuário ou senha inválida!',
+  //         },
+  //       )
+  //       .then(() => {
+  //         router.push('/medical/home');
+  //       });
+  //   } catch (_) {
+  //     console.error('Erro:');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // if (session?.token.startsWith('ey')) {
+  //   if (session?.token) {
+  //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + session.token;
+  //     localStorage.setItem('token', session.token);
+  //     Cookies.set('token', session.token);
+  //     setToken({
+  //       userId: session.userId,
+  //       login: session.login,
+  //       email: session.email,
+  //       token: session.token,
+  //       role: session.role,
+  //     });
+  //   } else {
+  //     delete axios.defaults.headers.common['Authorization'];
+  //     Cookies.remove('token');
+  //   }
+  // }, [session]);
   const handleSubmitForm = async (data: Teste) => {
+    console.log('Alternando');
     try {
-      await toast
-        .promise(
-          signIn('login', {
-            login: data.login,
-            password: data.password,
-            redirect: false,
-          }),
-          {
-            loading: 'Autenticando!',
-            success: () => 'Autenticação realizada com sucesso!',
-            error: 'Usuário ou senha inválida!',
-          },
-        )
-        .then(() => {
+      return await httpCliente
+        .post('/api/v1/auth', {
+          login: data.login,
+          password: data.password,
+        })
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
+          Cookies.set('token', res.data.token);
+          setToken({
+            userId: res.data.userId,
+            login: res.data.login,
+            email: res.data.email,
+            token: res.data.token,
+            role: res.data.role,
+          });
           router.push('/medical/home');
-        });
-    } catch (_) {
-      console.error('Erro:');
+        })
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    // if (session?.token.startsWith('ey')) {
-    if (session?.token) {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + session.token;
-      localStorage.setItem('token', session.token);
-      Cookies.set('token', session.token);
-      setToken({
-        userId: session.userId,
-        login: session.login,
-        email: session.email,
-        token: session.token,
-        role: session.role,
-      });
-    } else {
-      delete axios.defaults.headers.common['Authorization'];
-      Cookies.remove('token');
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + storedToken;
     }
-  }, [session]);
+  }, []);
 
   return (
     <S.FormContainers onSubmit={handleSubmit(handleSubmitForm)}>
