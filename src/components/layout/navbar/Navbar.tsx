@@ -3,6 +3,7 @@ import axios from 'axios';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoNotificationsSharp } from 'react-icons/io5';
 
@@ -27,6 +28,7 @@ function Navbar({ title, children }: Title) {
   const [tokens, setTokens] = useState<string>();
   const [login, setLogin] = useState<string>();
   const [role, setRole] = useState<string>();
+  const [countMessage, setCountMessage] = useState<number>(0);
 
   const { setToken } = useContext(LoginContext);
 
@@ -83,6 +85,28 @@ function Navbar({ title, children }: Title) {
     }
   }, []);
 
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const eventSource = new EventSource(`http://localhost:8080/sse/subscribe/${'1'}`);
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+      setMessage(data.message);
+      console.log(countMessage);
+      toast('Novo registro feito pelo paciente!', {
+        icon: '👀',
+      });
+
+      setCountMessage((prevCount) => prevCount + 1);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, [userId]);
+
   return (
     <S.ContentContainer>
       <S.MenuInfoContainer>
@@ -92,7 +116,7 @@ function Navbar({ title, children }: Title) {
           <div style={{ display: 'flex' }} onClick={() => setOpenNotification(!openNotification)}>
             <S.ContainerNotificacao>
               <IoNotificationsSharp style={{ fontSize: '27px', color: '#fff' }} />
-              <S.NumeroNotificacao>4</S.NumeroNotificacao>
+              <S.NumeroNotificacao>{countMessage}</S.NumeroNotificacao>
               {openNotification && <NotificacaoDropDown />}
             </S.ContainerNotificacao>
           </div>
