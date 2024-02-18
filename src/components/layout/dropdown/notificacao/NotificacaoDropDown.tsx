@@ -1,5 +1,6 @@
 'use client';
 import { Button } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { BiMessageSquareDots } from 'react-icons/bi';
 import { FaClipboardList } from 'react-icons/fa';
@@ -9,6 +10,22 @@ import { IoIosHeart } from 'react-icons/io';
 import * as S from './styles';
 
 function NotificacaoDropDown() {
+  // const [message, setMessage] = useState('');
+
+  // useEffect(() => {
+  //   const eventSource = new EventSource(`http://localhost:8080/sse/subscribe/${'1'}`);
+
+  //   eventSource.onmessage = (event) => {
+  //     const data = JSON.parse(event.data);
+  //     console.log(data);
+  //     setMessage(data.message);
+  //   };
+
+  //   return () => {
+  //     eventSource.close();
+  //   };
+  // }, []);
+
   return (
     <S.MenuContainer>
       <S.SmsTitle>
@@ -67,12 +84,15 @@ function NotificacaoDropDown() {
           </S.SmsContainer>
         </S.LiInfo>
       </ul>
+
       <S.ButtonContainer>
         <Button variant="contained">
           Todas Notificações
           <FaClipboardList style={{ paddingLeft: '4px', fontSize: '15px' }} />
         </Button>
       </S.ButtonContainer>
+
+      {/* <div key={1}>{message}</div> */}
     </S.MenuContainer>
   );
 }
