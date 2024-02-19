@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { BiMessageSquareDots } from 'react-icons/bi';
 import { FaClipboardList } from 'react-icons/fa';
@@ -9,7 +8,13 @@ import { IoIosHeart } from 'react-icons/io';
 
 import * as S from './styles';
 
-function NotificacaoDropDown() {
+interface CountMessage {
+  count: number;
+  cleanNotifications?: () => void;
+  timeNotification: number;
+}
+
+function NotificacaoDropDown({ count, cleanNotifications, timeNotification }: CountMessage) {
   // const [message, setMessage] = useState('');
 
   // useEffect(() => {
@@ -30,7 +35,7 @@ function NotificacaoDropDown() {
     <S.MenuContainer>
       <S.SmsTitle>
         <label>Notificações</label>
-        <span>Limpar</span>
+        <span onClick={cleanNotifications}>Limpar</span>
       </S.SmsTitle>
       <ul>
         <S.LiInfo>
@@ -42,19 +47,6 @@ function NotificacaoDropDown() {
           <S.SmsContainer>
             <S.LiTitle>Bom atendimento</S.LiTitle>
             <S.Sms>17 minutos atrás</S.Sms>
-          </S.SmsContainer>
-        </S.LiInfo>
-
-        <S.LiInfo>
-          <S.NavImage>
-            <i>
-              <AiOutlineUsergroupAdd style={{ fontSize: '17px' }} />
-            </i>
-          </S.NavImage>
-
-          <S.SmsContainer>
-            <S.LiTitle>Novo Registro</S.LiTitle>
-            <S.Sms>7 minutos atrás</S.Sms>
           </S.SmsContainer>
         </S.LiInfo>
 
@@ -83,6 +75,25 @@ function NotificacaoDropDown() {
             <S.Sms>2 minutos atrás</S.Sms>
           </S.SmsContainer>
         </S.LiInfo>
+
+        {count > 0 && (
+          <S.LiInfo>
+            <S.NavImage>
+              <i>
+                <AiOutlineUsergroupAdd style={{ fontSize: '17px' }} />
+              </i>
+            </S.NavImage>
+
+            <S.SmsContainer>
+              <S.LiTitle>Novo Registro</S.LiTitle>
+              <S.Sms>
+                {timeNotification < 60
+                  ? `${Math.floor(timeNotification)} segundos atrás`
+                  : `${Math.floor(timeNotification / 60)} minutos atrás`}
+              </S.Sms>
+            </S.SmsContainer>
+          </S.LiInfo>
+        )}
       </ul>
 
       <S.ButtonContainer>
