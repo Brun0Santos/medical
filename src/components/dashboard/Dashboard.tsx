@@ -22,6 +22,7 @@ function Dashboard() {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
+      console.log(token);
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + storedToken;
     }
   }, []);
@@ -29,7 +30,7 @@ function Dashboard() {
   return (
     <Layout title="Painel Administrativo">
       <S.Title>
-        👋Bem vindo,{' '}
+        👋Bem vindo,
         {token?.login !== undefined
           ? token?.login.charAt(0).toUpperCase() + token.login.slice(1)
           : ''}
