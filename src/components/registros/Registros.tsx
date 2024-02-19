@@ -25,6 +25,15 @@ function Registros() {
   const registroService = useRegisterService();
   const [novaConsulta, setNovaConsulta] = useState<boolean>(false);
 
+  const [periodo, setPeriodo] = useState('Todo');
+  const [categoria, setCategoria] = useState('Todas');
+  const [status, setStatus] = useState('Todos');
+
+  const [dataInicio, setDataInicio] = useState<Date>();
+  const [dataFim, setDataFim] = useState<Date>();
+
+  const [getConsulta, setConsulta] = useState<boolean>(false);
+
   useEffect(() => {
     setNovaConsulta(false);
     if (token?.role == 'ADMIN' || token?.role == 'DOCTOR') {
@@ -104,6 +113,70 @@ function Registros() {
     setIsModalOpen(false);
   };
 
+  const handleFilter = () => {
+    if (periodo == '1') {
+      const dataAtual = new Date();
+      const diaSemanaAtual = dataAtual.getDay();
+      const ultimoDiaSemanaAnterior = dataAtual.getDate() - diaSemanaAtual - 7;
+      const inicioSemanaAnterior = new Date(
+        dataAtual.getFullYear(),
+        dataAtual.getMonth(),
+        ultimoDiaSemanaAnterior,
+      );
+
+      setDataInicio(inicioSemanaAnterior);
+      setDataFim(new Date());
+      setConsulta(true);
+    } else if (periodo == '2') {
+      console.log('passou');
+      const dataAtual = new Date();
+      const inicioMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
+      const ultimoDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
+
+      setDataInicio(inicioMes);
+      setDataFim(ultimoDiaMes);
+
+      setConsulta(true);
+      console.log('verificando');
+    } else if (periodo == '3') {
+      const dataAtual = new Date();
+      const inicioAno = new Date(dataAtual.getFullYear(), 0, 1);
+
+      const ultimoDiaAno = new Date(dataAtual.getFullYear(), 11, 31);
+
+      setDataInicio(inicioAno);
+      setDataFim(ultimoDiaAno);
+      setConsulta(true);
+      console.log('verificando');
+    } else if (periodo == '4') {
+      const dataAtual = new Date();
+      const inicioAno = new Date(dataAtual.getFullYear() - 1, 0, 1);
+
+      const ultimoDiaAno = new Date(dataAtual.getFullYear() - 1, 11, 31);
+
+      console.log(inicioAno);
+      console.log(ultimoDiaAno);
+
+      setDataInicio(inicioAno);
+      setDataFim(ultimoDiaAno);
+      setConsulta(true);
+      console.log('verificando');
+    } else {
+      console.log('nada');
+    }
+  };
+
+  useEffect(() => {
+    if (dataInicio && dataFim) {
+      console.log(categoria);
+      console.log(status);
+      console.log(periodo);
+      console.log(dataInicio);
+      console.log(dataFim);
+      setNovaConsulta(false);
+    }
+  }, [getConsulta]);
+
   return (
     <Layout title="Painel Administrativo">
       <S.Container>
@@ -111,7 +184,57 @@ function Registros() {
           <h3>Atividades Médicas</h3>
 
           <div>
-            <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
+            <label htmlFor="periodo">Período:</label>
+            <select
+              id="periodo"
+              name="periodo"
+              value={periodo}
+              onChange={(e) => setPeriodo(e.target.value)}
+            >
+              <option value="0">Todo Período</option>
+              <option value="1">Esta semana</option>
+              <option value="2">Este Mês</option>
+              <option value="3">Este ano</option>
+              <option value="4">Ano passado</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="frutas">Categoria:</label>
+            <select
+              id="categoria"
+              name="categoria"
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+            >
+              <option value="">Todas</option>
+              <option value="EXAME">Exame</option>
+              <option value="CONSULTA">Consulta</option>
+              <option value="OPERACAO">Operacão</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="frutas">Status:</label>
+            <select
+              id="status"
+              name="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="">Todos</option>
+              <option value="CONFIRMADO">Confirmado</option>
+              <option value="AGUARDANDO">Aguardando</option>
+              <option value="REJEITADO">Rejeitado</option>
+            </select>
+          </div>
+
+          <div>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: '#659e6d' }}
+              onClick={handleFilter}
+            >
               Filtar
             </Button>
           </div>
