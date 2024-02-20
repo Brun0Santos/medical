@@ -31,6 +31,8 @@ function Navbar({ title, children }: Title) {
   const [countMessage, setCountMessage] = useState<number>(0);
 
   const { setToken } = useContext(LoginContext);
+  const [timeAgo, setTimeAgo] = useState<number>();
+  const [nowNotification, setNowNotification] = useState<Date>(new Date());
 
   const decodeToken = (token: string | null): JwtPayload | null => {
     try {
@@ -75,7 +77,7 @@ function Navbar({ title, children }: Title) {
 
       setToken({
         userId: decodedToken?.userId,
-        login: decodedToken?.login,
+        login: decodedToken?.sub ? decodedToken?.sub : '',
         email: decodedToken?.email,
         token: decodedToken?.token,
         role: decodedToken?.role,
@@ -85,7 +87,19 @@ function Navbar({ title, children }: Title) {
     }
   }, []);
 
-  const [message, setMessage] = useState('');
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentTime = new Date();
+
+      const timeDifference = (currentTime.getTime() - nowNotification.getTime()) / 1000;
+
+      setTimeAgo(timeDifference);
+    }, 1000); // Atualiza a cada segundo
+
+    return () => clearInterval(interval);
+  });
+
+  const [, setMessage] = useState('');
 
   useEffect(() => {
     const eventSource = new EventSource(`http://localhost:8080/sse/subscribe/${'1'}`);
@@ -100,12 +114,18 @@ function Navbar({ title, children }: Title) {
       });
 
       setCountMessage((prevCount) => prevCount + 1);
+
+      setNowNotification(new Date());
     };
 
     return () => {
       eventSource.close();
     };
   }, [userId]);
+
+  const cleanNotifications = () => {
+    setCountMessage(0);
+  };
 
   return (
     <S.ContentContainer>
@@ -117,7 +137,13 @@ function Navbar({ title, children }: Title) {
             <S.ContainerNotificacao>
               <IoNotificationsSharp style={{ fontSize: '27px', color: '#fff' }} />
               <S.NumeroNotificacao>{countMessage}</S.NumeroNotificacao>
-              {openNotification && <NotificacaoDropDown />}
+              {openNotification && (
+                <NotificacaoDropDown
+                  count={countMessage}
+                  cleanNotifications={cleanNotifications}
+                  timeNotification={timeAgo ? timeAgo : 0}
+                />
+              )}
             </S.ContainerNotificacao>
           </div>
 
