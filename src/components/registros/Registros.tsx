@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { format } from 'date-fns';
 import Link from 'next/link';
 import router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
@@ -29,8 +30,8 @@ function Registros() {
   const [categoria, setCategoria] = useState('Todas');
   const [status, setStatus] = useState('Todos');
 
-  const [dataInicio, setDataInicio] = useState<Date>();
-  const [dataFim, setDataFim] = useState<Date>();
+  const [dataInicio, setDataInicio] = useState<string>();
+  const [dataFim, setDataFim] = useState<string>();
 
   const [getConsulta, setConsulta] = useState<boolean>(false);
 
@@ -124,28 +125,26 @@ function Registros() {
         ultimoDiaSemanaAnterior,
       );
 
-      setDataInicio(inicioSemanaAnterior);
-      setDataFim(new Date());
+      setDataInicio(format(inicioSemanaAnterior, "yyyy-MM-dd'T'HH:mm:ss"));
+      setDataFim(format(new Date(), "yyyy-MM-dd'T'HH:mm:ss"));
       setConsulta(true);
     } else if (periodo == '2') {
-      console.log('passou');
       const dataAtual = new Date();
       const inicioMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
       const ultimoDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
 
-      setDataInicio(inicioMes);
-      setDataFim(ultimoDiaMes);
+      setDataInicio(format(inicioMes, "yyyy-MM-dd'T'HH:mm:ss"));
+      setDataFim(format(ultimoDiaMes, "yyyy-MM-dd'T'HH:mm:ss"));
 
       setConsulta(true);
-      console.log('verificando');
     } else if (periodo == '3') {
       const dataAtual = new Date();
       const inicioAno = new Date(dataAtual.getFullYear(), 0, 1);
 
       const ultimoDiaAno = new Date(dataAtual.getFullYear(), 11, 31);
 
-      setDataInicio(inicioAno);
-      setDataFim(ultimoDiaAno);
+      setDataInicio(format(inicioAno, "yyyy-MM-dd'T'HH:mm:ss"));
+      setDataFim(format(ultimoDiaAno, "yyyy-MM-dd'T'HH:mm:ss"));
       setConsulta(true);
       console.log('verificando');
     } else if (periodo == '4') {
@@ -154,27 +153,45 @@ function Registros() {
 
       const ultimoDiaAno = new Date(dataAtual.getFullYear() - 1, 11, 31);
 
-      console.log(inicioAno);
-      console.log(ultimoDiaAno);
-
-      setDataInicio(inicioAno);
-      setDataFim(ultimoDiaAno);
+      setDataInicio(format(inicioAno, "yyyy-MM-dd'T'HH:mm:ss"));
+      setDataFim(format(ultimoDiaAno, "yyyy-MM-dd'T'HH:mm:ss"));
       setConsulta(true);
-      console.log('verificando');
     } else {
-      console.log('nada');
+      registroService
+        .getALlRegisterFromDoctorFilter('1', '', '', categoria, status)
+        .then((data) => {
+          setRegistro(data);
+          setPeriodo('');
+          setStatus('');
+          setCategoria('');
+          setDataInicio('');
+          setDataFim('');
+          setNovaConsulta(false);
+        })
+        .catch((e) => console.log(e));
     }
   };
 
   useEffect(() => {
     if (dataInicio && dataFim) {
-      console.log(categoria);
-      console.log(status);
-      console.log(periodo);
-      console.log(dataInicio);
-      console.log(dataFim);
-      setNovaConsulta(false);
+      registroService
+        .getALlRegisterFromDoctorFilter('1', dataInicio, dataFim, categoria, status)
+        .then((data) => {
+          console.log(data);
+          console.log(categoria);
+          console.log(status);
+          console.log(periodo);
+          setPeriodo('');
+          setStatus('');
+          setCategoria('');
+          setDataInicio('');
+          setDataFim('');
+          setNovaConsulta(false);
+        })
+        .catch((e) => console.log(e));
     }
+
+    setNovaConsulta(false);
   }, [getConsulta]);
 
   return (
