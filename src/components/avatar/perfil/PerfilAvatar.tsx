@@ -1,12 +1,13 @@
 import { Avatar, Button } from '@mui/material';
 // import axios from 'axios';
 import Link from 'next/link';
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 // import React, { ChangeEvent, useState } from 'react';
 import { GoVerified } from 'react-icons/go';
 
 import { LoginContext } from '../../../context/LoginContext';
 import { useFileService } from '../../../http';
+import { AvatarDoctor } from '../../../models/avatar/avatarModel';
 import Layout from '../../layout/Layout';
 import * as S from './styles';
 
@@ -61,7 +62,11 @@ function PerfilAvatar() {
 
   const [, setSelectedFileName] = useState<File | null>();
 
+  const [novaConsulta, setNovaConsulta] = useState<boolean>(false);
+
   const service = useFileService();
+
+  const [registrosPorDoutor, setRegistroPorDoutor] = useState<AvatarDoctor>();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -75,10 +80,25 @@ function PerfilAvatar() {
 
       service
         .saveRegister(formData)
-        .then(() => console.log('sucesso'))
+        .then(() => {
+          console.log('sucesso');
+          setNovaConsulta(true);
+        })
         .catch(() => {});
     }
   };
+
+  useEffect(() => {
+    if (token?.userId) {
+      service
+        .avatarFromDoutor(token?.userId)
+        .then((data) => {
+          setRegistroPorDoutor(data);
+          setNovaConsulta(false);
+        })
+        .catch(() => {});
+    }
+  }, [token, novaConsulta]);
 
   return (
     <Layout title="Painel Administrativo">
@@ -103,10 +123,11 @@ function PerfilAvatar() {
               <Avatar
                 className="fileInput"
                 alt="luciano"
-                src={`https://randomuser.me/api/portraits/men/2.jpg`}
+                src={registrosPorDoutor?.file ? `data:image;base64,${registrosPorDoutor.file}` : ''}
                 style={{
                   cursor: 'pointer',
                   fontSize: '13px',
+                  border: '1px solid green',
                 }}
               />
             </label>
@@ -134,7 +155,7 @@ function PerfilAvatar() {
           <div>
             <h4>Seu e-mail</h4>
             <p>Esse é o seu e-mail utilizado no cadastro.</p>
-            <S.Email>bruno@gmail.com</S.Email>
+            <S.Email>{token?.email}</S.Email>
           </div>
         </S.EmailContainer>
         <S.DivTeste>
