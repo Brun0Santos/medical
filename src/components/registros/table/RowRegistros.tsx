@@ -2,10 +2,11 @@
 
 import { Avatar, TableCell, TableRow } from '@mui/material';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GrStatusInfo } from 'react-icons/gr';
 import { MdModeEdit } from 'react-icons/md';
 
+import { LoginContext } from '../../../context/LoginContext';
 import { Registro } from '../../../models/registro/registroModel';
 import * as S from './styles';
 
@@ -35,6 +36,8 @@ const registroCoresCategoria: RegistrosCores = {
 };
 
 const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
+  const { token } = useContext(LoginContext);
+
   const [date, setDate] = useState<string>('');
   // const [isVisibleInfo, setIsVisibleInfo] = useState<boolean>(false);
 
@@ -55,7 +58,10 @@ const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
   return (
     <TableRow key={registro.id} className="slow">
       <TableCell align="left">
-        <Avatar alt="luciano" src={`https://randomuser.me/api/portraits/men/${registro.id}.jpg`} />
+        {/* <Avatar alt="luciano" src={`https://randomuser.me/api/portraits/men/${registro.id}.jpg`} /> */}
+        <Avatar alt="luciano" sx={{ bgcolor: '#64b4f5' }}>
+          {registro.typeMedicalAppointment?.substring(0, 2).toUpperCase()}
+        </Avatar>
       </TableCell>
 
       <TableCell align="center">
@@ -93,9 +99,11 @@ const RowRegistros = ({ registro, onEdit, onInfo }: PatientRowProps) => {
       </TableCell>
       <TableCell align="left">
         <S.ButtonGroup>
-          <S.ButtonEdit onClick={() => onEdit(registro)}>
-            <MdModeEdit style={{ color: '#25435b', fontSize: '17px' }} />
-          </S.ButtonEdit>
+          {token?.role == 'ADMIN' && (
+            <S.ButtonEdit onClick={() => onEdit(registro)}>
+              <MdModeEdit style={{ color: '#25435b', fontSize: '17px' }} />
+            </S.ButtonEdit>
+          )}
 
           <S.ButtonInfo onClick={() => onInfo(registro)}>
             <GrStatusInfo style={{ color: '#fff', fontSize: '17px' }} />
