@@ -120,8 +120,9 @@ function Navbar({ title, children }: Title) {
 
     return () => {
       eventSource.close();
+      // userId
     };
-  }, [userId]);
+  }, []);
 
   const cleanNotifications = () => {
     setCountMessage(0);
