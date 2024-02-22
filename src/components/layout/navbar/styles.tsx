@@ -52,9 +52,11 @@ export const NavImage = styled.span`
   justify-content: center;
 
   img {
-    height: 35px;
-    width: 35px;
+    height: 39px;
+    width: 37px;
     border-radius: 50%;
+    border: 1px solid green;
+    object-fit: cover;
   }
 `;
 
