@@ -105,5 +105,5 @@ export const InfoContainer = styled.span`
   background: #4764e9;
   border-radius: 7px;
   padding: 3px;
-  width: 81px;
+  width: 120px;
 `;
