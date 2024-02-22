@@ -37,7 +37,7 @@ function Registros() {
 
   useEffect(() => {
     setNovaConsulta(false);
-    if (token?.role == 'ADMIN' || token?.role == 'DOCTOR') {
+    if (token?.role == 'ADMIN') {
       try {
         registroService
           .getALlRegister()
@@ -45,6 +45,17 @@ function Registros() {
             setRegistro(data);
           })
           .catch(() => toast.error('Nenhuma consulta cadastrada!'));
+      } catch (error) {
+        toast.error('Algum erro inesperado aconteceu!');
+      }
+    } else if (token?.role == 'DOCTOR') {
+      try {
+        registroService
+          .getAllRegisterByDoctorId(token.userId)
+          .then((data) => {
+            setRegistro(data);
+          })
+          .catch(() => toast.error('Nenhuma consulta cadastrada pro doutor!!'));
       } catch (error) {
         toast.error('Algum erro inesperado aconteceu!');
       }
@@ -58,7 +69,7 @@ function Registros() {
   }, []);
 
   useEffect(() => {
-    if (token?.role == 'ADMIN' || token?.role == 'DOCTOR') {
+    if (token?.role == 'ADMIN') {
       try {
         registroService
           .getALlRegister()
@@ -161,11 +172,6 @@ function Registros() {
         .getALlRegisterFromDoctorFilter('1', '', '', categoria, status)
         .then((data) => {
           setRegistro(data);
-          setPeriodo('');
-          setStatus('');
-          setCategoria('');
-          setDataInicio('');
-          setDataFim('');
           setNovaConsulta(false);
         })
         .catch((e) => console.log(e));
@@ -200,9 +206,9 @@ function Registros() {
         <S.NavContainer>
           <h3>Atividades Médicas</h3>
 
-          <div>
-            <label htmlFor="periodo">Período:</label>
-            <select
+          <S.DivSelect>
+            <S.LabelSelect htmlFor="periodo">Período:</S.LabelSelect>
+            <S.Select
               id="periodo"
               name="periodo"
               value={periodo}
@@ -213,12 +219,12 @@ function Registros() {
               <option value="2">Este Mês</option>
               <option value="3">Este ano</option>
               <option value="4">Ano passado</option>
-            </select>
-          </div>
+            </S.Select>
+          </S.DivSelect>
 
-          <div>
-            <label htmlFor="frutas">Categoria:</label>
-            <select
+          <S.DivSelect>
+            <S.LabelSelect htmlFor="frutas">Categoria:</S.LabelSelect>
+            <S.Select
               id="categoria"
               name="categoria"
               value={categoria}
@@ -228,12 +234,12 @@ function Registros() {
               <option value="EXAME">Exame</option>
               <option value="CONSULTA">Consulta</option>
               <option value="OPERACAO">Operacão</option>
-            </select>
-          </div>
+            </S.Select>
+          </S.DivSelect>
 
-          <div>
-            <label htmlFor="frutas">Status:</label>
-            <select
+          <S.DivSelect>
+            <S.LabelSelect htmlFor="frutas">Status:</S.LabelSelect>
+            <S.Select
               id="status"
               name="status"
               value={status}
@@ -243,8 +249,8 @@ function Registros() {
               <option value="CONFIRMADO">Confirmado</option>
               <option value="AGUARDANDO">Aguardando</option>
               <option value="REJEITADO">Rejeitado</option>
-            </select>
-          </div>
+            </S.Select>
+          </S.DivSelect>
 
           <div>
             <Button
