@@ -28,7 +28,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <Layout title="Painel Administrativo">
+    <Layout title="Dash">
       <S.Title>
         👋Bem vindo,
         {token?.login !== undefined
