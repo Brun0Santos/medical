@@ -107,3 +107,11 @@ export const InfoContainer = styled.span`
   padding: 3px;
   width: 120px;
 `;
+
+export const TitleContainer = styled.span`
+  color: #fff;
+  background: #4764e9;
+  border-radius: 7px;
+  padding: 3px;
+  width: 120px;
+`;
