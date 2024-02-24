@@ -76,7 +76,7 @@ function Dashboard() {
 
           <S.DivInfo>
             <S.DivTitle>11.19k</S.DivTitle>
-            <div>Consulta/Vídeos</div>
+            <div>Consulta/Vídeo</div>
           </S.DivInfo>
         </S.ContainerVideo>
       </S.ContainerEstatisticas>
