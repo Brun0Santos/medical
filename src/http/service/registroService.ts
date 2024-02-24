@@ -22,6 +22,12 @@ export const useRegisterService = () => {
     return response.data;
   };
 
+  const getAllRegisterByDoctorId = async (id: string): Promise<Array<RegistroFromId>> => {
+    const url: string = `/api/v1/appointments/doctor/${id}`;
+    const response: AxiosResponse<Array<RegistroFromId>> =
+      await httpCliente.get<Array<RegistroFromId>>(url);
+    return response.data;
+  };
   const getALlRegisterFromId = async (id: string): Promise<Array<RegistroFromId>> => {
     const url: string = `/api/v1/appointments/${id}`;
     const response: AxiosResponse<Array<RegistroFromId>> =
@@ -63,6 +69,18 @@ export const useRegisterService = () => {
   //   return response.data;
   // };
 
+  const getALlRegisterFromDoctorFilter = async (
+    id: string,
+    dataInicio: string = '',
+    dataFim: string = '',
+    serviceType: string = '',
+    status: string = '',
+  ): Promise<Array<Registro>> => {
+    const url: string = `/api/v1/file?id=${id}&dataInicio=${dataInicio}&dataFim=${dataFim}&serviceType=${serviceType}&status=${status}`;
+    const response: AxiosResponse<Array<Registro>> = await httpCliente.get<Array<Registro>>(url);
+    return response.data;
+  };
+
   const saveRegister = async (formData: FormData): Promise<void> => {
     const url: string = `http://localhost:8080/api/v1/appointment`;
     await axios.post(url, formData, {
@@ -80,6 +98,8 @@ export const useRegisterService = () => {
     saveRegister,
     getALlRegisterFromDoctor,
     updatelRegisterFromId,
+    getALlRegisterFromDoctorFilter,
     saveFile,
+    getAllRegisterByDoctorId,
   };
 };
