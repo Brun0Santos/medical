@@ -76,7 +76,7 @@ function Registros() {
           .then((data) => {
             setRegistro(data);
           })
-          .catch(() => toast.error('Nenhuma consulta cadastrada!'));
+          .catch(() => toast.error('Nenhuma consulta cadastrada!!'));
       } catch (error) {
         toast.error('Algum erro inesperado aconteceu!');
       }
