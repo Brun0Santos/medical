@@ -11,7 +11,7 @@ export const useFileService = () => {
     const url: string = `http://localhost:8080/api/v1/avatar/doctor`;
     await axios.post(url, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-dataS',
       },
     });
   };
