@@ -4,7 +4,7 @@ import { Page } from '../../components/commom/pageable/especialidade/Speciality'
 import { Speciality } from '../../models/especialidade/especialidadeModel';
 import { httpCliente } from '../routes/routes';
 
-const resourceUrl: string = '/api/v1/specialitys';
+const resourceUrl: string = '/api/v1/speciality';
 
 export const useSpecialityService = () => {
   const salvarEspecialidade = async (speciality: Speciality): Promise<Speciality> => {
