@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { Login, LoginData } from '../../models/login/loginModel';
 import { httpCliente } from '../routes/routes';
 
-const resourceUrl: string = '/api/v1/auths';
+const resourceUrl: string = '/api/v1/auth';
 
 interface LoginProps {
   login?: string;
