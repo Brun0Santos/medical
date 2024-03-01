@@ -60,7 +60,7 @@ function InfoModal({ closeModal, registro, confirmAppointment, rejectAppointment
       <S.InfoModal>
         <S.ContentModal>
           <label htmlFor="">
-            Categoria
+            Categorias
             <HiOutlineClipboardList />
           </label>
           <S.InfoContainer>{registro?.typeMedicalAppointment}</S.InfoContainer>
