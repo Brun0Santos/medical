@@ -120,7 +120,7 @@ function RegistroForm() {
     <Layout title="Painel Administrativo">
       <S.Container>
         <S.NavContainer>
-          <h2>Registrar Atividade</h2>
+          <h2>Registrar Atividades</h2>
           <Link href={'/medical/registros'}>
             <Button variant="contained" style={{ backgroundColor: '#659e6d' }}>
               Cancelar
