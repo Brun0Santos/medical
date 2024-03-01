@@ -103,7 +103,7 @@ function RegistroForm() {
   };
 
   const options = [
-    { value: 'NENHUM', label: 'Nenhum' },
+    { value: 'NENHUM', label: 'Nenhuma' },
     { value: 'CONSULTA', label: 'Consulta' },
     { value: 'EXAME', label: 'Exame' },
     { value: 'OPERACAO', label: 'Operação' },
