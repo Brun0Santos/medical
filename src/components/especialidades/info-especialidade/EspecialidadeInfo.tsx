@@ -48,7 +48,7 @@ function EspecialidadeInfo() {
           <ul>
             <S.LiContainer>
               <BiBadgeCheck />
-              <S.Label htmlFor="">Nome da Especialidade::</S.Label>
+              <S.Label htmlFor="">Nome da Especialidade:</S.Label>
               <S.Span>{speciality?.name}</S.Span>
             </S.LiContainer>
 
