@@ -17,7 +17,7 @@ function AdminView() {
       <S.MenuContainer>
         <ul>
           <S.MenuTitle>
-            <span className="title">Gerenciamento</span>
+            <span className="title">Gerenciamentos</span>
             <span className="line"></span>
           </S.MenuTitle>
 
