@@ -33,7 +33,7 @@ function AdminView() {
           </S.LiContainer>
 
           <S.LiContainer>
-            <Link href={'/medical/especialidadess'} legacyBehavior>
+            <Link href={'/medical/especialidades'} legacyBehavior>
               <S.Link>
                 <i>
                   <FiGitBranch />
