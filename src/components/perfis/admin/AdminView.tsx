@@ -22,7 +22,7 @@ function AdminView() {
           </S.MenuTitle>
 
           <S.LiContainer>
-            <Link href={'/medical/home'} legacyBehavior>
+            <Link href={'/medical/homeS'} legacyBehavior>
               <S.Link>
                 <i>
                   <RxDashboard />
