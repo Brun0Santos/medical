@@ -27,7 +27,7 @@ function TableEspecialidade({ especialidade, onEdit, onDelete, onInfo }: ListaEs
           <TableRow style={{ backgroundColor: '#e8e8e8' }}>
             <TableCell align="left">Img</TableCell>
             <TableCell align="center">Ocupação</TableCell>
-            <TableCell align="center">Resumos</TableCell>
+            <TableCell align="center">Resumo</TableCell>
             <TableCell align="center">Opções</TableCell>
           </TableRow>
         </TableHead>
