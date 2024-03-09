@@ -34,7 +34,7 @@ function Especialidade() {
       if (especialidade.id) {
         await toast.promise(specialityService.deleteSpecialityFromId(especialidade.id), {
           loading: 'Deletando especialidade...',
-          success: () => 'Especialidade deletadaa!',
+          success: () => 'Especialidade deletada!',
           error: 'Erro ao deletar especialidade!',
         });
         setNovaConsulta(true);
