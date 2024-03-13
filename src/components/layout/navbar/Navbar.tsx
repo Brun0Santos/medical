@@ -161,7 +161,7 @@ function Navbar({ title, children }: Title) {
           <S.NameText onClick={() => setOpenMenu(!openMenu)}>
             <h4>{login !== undefined ? login.charAt(0).toUpperCase() + login.slice(1) : ''}</h4>
             <div style={{ fontSize: '12px' }}>
-              {role == 'ADMIN' && <span className="email">Administrador</span>}
+              {role == 'ADMIN' && <span className="email">Administradores</span>}
               {role == 'PATIENT' && <span className="email">Paciente</span>}
               {role == 'DOCTOR' && <span className="email">Médico</span>}
               <IoIosArrowDown style={{ marginLeft: '10px', fontSize: '15px' }} />
