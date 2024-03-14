@@ -160,7 +160,7 @@ function RegistroForm() {
 
           <S.CentroContainer encType="multipart/form-data">
             <S.InputBox>
-              <S.LabelInput htmlFor="cpf">Data</S.LabelInput>
+              <S.LabelInput htmlFor="cpf">Datas</S.LabelInput>
               <input
                 type="date"
                 id="cpf"
