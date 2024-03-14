@@ -163,7 +163,7 @@ function Navbar({ title, children }: Title) {
             <div style={{ fontSize: '12px' }}>
               {role == 'ADMIN' && <span className="email">Administrador</span>}
               {role == 'PATIENT' && <span className="email">Paciente</span>}
-              {role == 'DOCTOR' && <span className="email">Médico</span>}
+              {role == 'DOCTOR' && <span className="email">Médicos</span>}
               <IoIosArrowDown style={{ marginLeft: '10px', fontSize: '15px' }} />
               {openMenu && <MenuDropDown />}
             </div>
