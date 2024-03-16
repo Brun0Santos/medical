@@ -34,7 +34,7 @@ function NotificacaoDropDown({ count, cleanNotifications, timeNotification }: Co
   return (
     <S.MenuContainer>
       <S.SmsTitle>
-        <label>Notificações</label>
+        <label>Notificaçõess</label>
         <span onClick={cleanNotifications}>Limpar</span>
       </S.SmsTitle>
       <ul>
