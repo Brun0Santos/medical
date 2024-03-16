@@ -27,7 +27,7 @@ function TabelaRegistroFromId({ registro, onEdit, onInfo }: PatientList) {
         <TableHead>
           <TableRow style={{ backgroundColor: '#d4d4d4' }}>
             <TableCell align="left">#</TableCell>
-            <TableCell align="center">Descrição</TableCell>
+            <TableCell align="center">Descriçãos</TableCell>
             <TableCell align="center">Data</TableCell>
             <TableCell align="center">Categoria</TableCell>
             <TableCell align="center">Status</TableCell>
