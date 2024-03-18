@@ -115,7 +115,7 @@ function PerfilAvatar() {
         <S.AvatarContainer>
           <div>
             <h4>Seu avatar</h4>
-            <p>Este é o seu avatar, clique nele para modificá-lo.</p>
+            <p>Este é o seu avatar, clique nele para modificá-los.</p>
           </div>
 
           <div style={{ display: 'flex' }}>
