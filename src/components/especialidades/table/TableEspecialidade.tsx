@@ -28,7 +28,7 @@ function TableEspecialidade({ especialidade, onEdit, onDelete, onInfo }: ListaEs
             <TableCell align="left">Img</TableCell>
             <TableCell align="center">Ocupação</TableCell>
             <TableCell align="center">Resumo</TableCell>
-            <TableCell align="center">Opções</TableCell>
+            <TableCell align="center">Opçõess</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
