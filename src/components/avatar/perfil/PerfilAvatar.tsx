@@ -149,7 +149,7 @@ function PerfilAvatar() {
             ></span>
           </div>
         </S.AvatarContainer>
-        <S.DivTeste>Um avatar é opcional, mas fortemente recomendado.</S.DivTeste>
+        <S.DivTeste>Um avatar é opcional, mas fortemente recomendados.</S.DivTeste>
 
         <S.EmailContainer>
           <div>
