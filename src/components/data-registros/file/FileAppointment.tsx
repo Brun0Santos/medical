@@ -43,7 +43,7 @@ function FileAppointment({ registro }: RegistroProps) {
             )
           }
         >
-          Anexos {registro?.id}
+          Anexo {registro?.id}
         </span>
       </div>
     </S.AnexoFile>
