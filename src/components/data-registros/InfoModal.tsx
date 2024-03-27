@@ -122,7 +122,7 @@ function InfoModalCalendar({ closeModal, registro }: ModalProps) {
 
         <S.ContentModal>
           <label htmlFor="">
-            Laudo Médico
+            Laudo Médicos
             <IoCalendarNumberOutline />
           </label>
         </S.ContentModal>
