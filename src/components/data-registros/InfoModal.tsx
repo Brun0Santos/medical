@@ -71,7 +71,7 @@ function InfoModalCalendar({ closeModal, registro }: ModalProps) {
 
         <S.ContentModal>
           <label htmlFor="">
-            Tipo do registro
+            Tipo do registros
             <TbFileDescription />
           </label>
           <span>{registro?.typeMedicalAppointment}</span>
